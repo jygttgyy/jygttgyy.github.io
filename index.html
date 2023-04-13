@@ -53,10 +53,24 @@ Maintenant, je vais à la ligne...</p>
 
 </section>
 <script>
-    location.replace("fr.html");
-    /*var Language = navigator.language || navigator.userLanguage;
-    var UserLanguage = Language.slice(0, 2)
-    print(UserLanguage)
+    function FileExist(urlToFile) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', urlToFile, false);
+        xhr.send();
+        if (xhr.status == "404") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    var Language = navigator.language || navigator.userLanguage;
+    var UserLanguage = Language.slice(0, 2);
+    if (FileExist(UserLanguage + ".html") === true) {
+        window.location.replace(UserLanguage + ".html");
+    } else {
+        window.location.replace("en.html");
+    }
+    /*print(UserLanguage)
     if (UserLanguage === "fr") {
         document.getElementById("FR").style.display = "block";
     } else {
