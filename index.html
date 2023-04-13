@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<section id="FR" style="display:none"> <!--block-->
+<html>
 <head>
 <title>Ma première page</title>
 
@@ -54,10 +54,10 @@ Maintenant, je vais à la ligne...</p>
 <script>
     var Language = navigator.language || navigator.userLanguage;
     var UserLanguage = Language.slice(0, 2)
-    if (Language === "fr") {
-        x.style.display = "block";
-    } else if (x.style.display === "none"){
-        x.style.display = "none";
+    if (UserLanguage === "fr") {
+        document.getElementById("FR").style.display = "block";
+    } else {
+        document.getElementById("FR").style.display = "none";
         }
 </script>
 <style>
@@ -65,3 +65,4 @@ Maintenant, je vais à la ligne...</p>
 </style>
 </body>
 </html>
+</section>
