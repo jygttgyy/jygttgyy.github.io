@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head style="background-color: rgb(40, 40, 40);">
         <title>Page web officielle de jygttgyy</title>
         <link rel="icon" type="image/x-icon" href="PfP_R.ico">
     </head>
-    <body>
-        <div></div>
+    <body style="background-color: rgb(50, 50, 50);">
+        <nav class="tab">
+            <button class="tablinks active" onclick="openSection(event, 'Home')">Menu</button>
+            <button class="tablinks" onclick="openSection(event, 'Languages')">Langues</button>
+            <button class="tablinks" onclick="openSection(event, 'Delta Dev.')">Delta Dev.</button>
+        </nav>
+        <div id="Home" class="tabcontent" style="display: block;">
+            <h3>Menu</h3>
+            <p>Bienvenue!</p>
+        </div>
+        <div id="Languages" class="tabcontent">
+            <h3>Langues</h3>
+            <button onclick="openLanguage('en')">English</button>
+            <button onclick="openLanguage('fr')">Français</button>
+        </div>
+        <div id="Delta Dev." class="tabcontent">
+            <h3>Delta Dev.</h3>
+            <a href="https://www.roblox.com/games/12882884124">Jeu Bear en développement</a>
+        </div>
     </body>
 </html>
+<link rel="stylesheet" href="mystyle.css">
+<script>
+    function openSection(event, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        };
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        };
+        document.getElementById(cityName).style.display = "block";
+        event.currentTarget.className += " active";
+        };
+    function openLanguage(language) {
+        window.location.replace(language + ".html")
+    }
+</script>
