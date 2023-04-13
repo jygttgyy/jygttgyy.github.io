@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<section id="FR" style="display:none"> <!--block-->
 <html>
+<section id="FR" style="display:none"> <!--block-->
 <head>
 <title>Ma première page</title>
 
@@ -51,9 +51,10 @@ Maintenant, je vais à la ligne...</p>
 
 <p>Je n'aime pas ça mais voici <a href="https://www.csj-chenee.be">un lien vers le site du collège.</a></p>
 
+</section>
 <script>
     var Language = navigator.language || navigator.userLanguage;
-    var UserLanguage = Language.slice(0, 2)
+    var UserLanguage = "fr"//Language.slice(0, 2)
     if (UserLanguage === "fr") {
         document.getElementById("FR").style.display = "block";
     } else {
@@ -65,4 +66,3 @@ Maintenant, je vais à la ligne...</p>
 </style>
 </body>
 </html>
-</section>
