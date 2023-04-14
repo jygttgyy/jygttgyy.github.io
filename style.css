@@ -17,6 +17,16 @@ body {
     transition: 0.3s;
     font-size: 17px;
 }
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
 .tab button:hover {
     background-color: #ddd;
 }
@@ -24,11 +34,12 @@ body {
     background-color: #ccc;
 }
 @keyframes Appear {
-    from {display: none;}
-    to {display: block;}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 .tabcontent {
     display: none;
+    opacity: 1;
     padding: 6px 12px;
     animation-name: Appear;
     animation-duration: 2s;
@@ -36,6 +47,7 @@ body {
 }
 .tabcontent.active {
     display: block;
+    opacity: 0;
     padding: 6px 12px;
     animation-name: Appear;
     animation-duration: 2s;
