@@ -8,7 +8,7 @@ body {
     border-radius: 8px;
     background-color: rgb(70, 70, 70);
 }
-.tab button {
+.tab button, .tab a {
     background-color: inherit;
     float: left;
     border: none;
