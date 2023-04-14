@@ -37,19 +37,16 @@ body {
     from {opacity: 0;}
     to {opacity: 1;}
 }
-.tabcontent {
-    display: none;
+.tabcontent.active {
+    display: block;
     opacity: 0;
     padding: 6px 12px;
     animation-name: Appear;
     animation-duration: 2s;
-    animation-direction: reverse;
-}
-.tabcontent.active {
-    display: block;
-    opacity: 1;
-    padding: 6px 12px;
-    animation-name: Appear;
-    animation-duration: 2s;
     animation-direction: normal;
+}
+.tabcontent {
+    display: none;
+    opacity: 0;
+    padding: 6px 12px;
 }
