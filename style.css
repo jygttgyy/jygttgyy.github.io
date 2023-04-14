@@ -23,7 +23,21 @@ body {
 .tab button.active {
     background-color: #ccc;
 }
+@keyframes Appear {
+    from {display: none;}
+    to {display: block;}
+}
 .tabcontent {
     display: none;
     padding: 6px 12px;
+    animation-name: Appear;
+    animation-duration: 2s;
+    animation-direction: reverse;
+}
+.tabcontent.active {
+    display: block;
+    padding: 6px 12px;
+    animation-name: Appear;
+    animation-duration: 2s;
+    animation-direction: normal;
 }
