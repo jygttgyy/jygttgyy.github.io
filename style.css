@@ -32,7 +32,7 @@ body {
     background-color: rgb(60, 60, 60);
 }
 .tab button.active {
-    background-color: rgb(50, 50, 50);
+    background-color: rgb(55, 55, 55);
 }
 @keyframes Appear {
     from {opacity: 0;}
