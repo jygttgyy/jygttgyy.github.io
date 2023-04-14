@@ -39,7 +39,7 @@ body {
 }
 .tabcontent {
     display: none;
-    opacity: 1;
+    opacity: 0;
     padding: 6px 12px;
     animation-name: Appear;
     animation-duration: 2s;
@@ -47,7 +47,7 @@ body {
 }
 .tabcontent.active {
     display: block;
-    opacity: 0;
+    opacity: 1;
     padding: 6px 12px;
     animation-name: Appear;
     animation-duration: 2s;
