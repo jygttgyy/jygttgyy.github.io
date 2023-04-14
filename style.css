@@ -16,7 +16,7 @@ body {
     cursor: pointer;
     padding: 12px 10px;
     transition: 0.3s;
-    font-size: auto;
+    font-size: 17px;
 }
 .tab button:hover, .tab a:hover {
     background-color: rgb(60, 60, 60);
