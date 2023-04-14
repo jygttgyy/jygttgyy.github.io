@@ -14,11 +14,11 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 12px 10px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: auto;
 }
-.tab button:hover {
+.tab button:hover, .tab a:hover {
     background-color: rgb(60, 60, 60);
 }
 .tab button.active {
