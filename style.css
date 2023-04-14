@@ -4,7 +4,7 @@ body {
 }
 .tab {
     overflow: hidden;
-    border: 1px solid rgb(50, 50, 50);
+    border: 1px solid rgb(30, 30, 30);
     border-radius: 8px;
     background-color: rgb(70, 70, 70);
 }
@@ -29,7 +29,7 @@ body {
     font-size: 17px;
 }
 .tab button:hover {
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(60, 60, 60);
 }
 .tab button.active {
     background-color: rgb(50, 50, 50);
