@@ -4,8 +4,8 @@ body {
 }
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: rgb(70, 70, 70);
 }
 .tab button {
     background-color: inherit;
@@ -28,10 +28,10 @@ body {
     font-size: 17px;
 }
 .tab button:hover {
-    background-color: #ddd;
+    background-color: rgb(70, 70, 70);
 }
 .tab button.active {
-    background-color: #ccc;
+    background-color: rgb(50, 50, 50);
 }
 @keyframes Appear {
     from {opacity: 0;}
