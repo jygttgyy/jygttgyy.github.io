@@ -14,7 +14,7 @@ body {
     border-radius: 8px;
     background-color: rgb(70, 70, 70);
     animation-name: Appear;
-    animation-duration: 3s;
+    animation-duration: 2s;
 }
 .tab button, .tab a {
     background-color: inherit;
@@ -40,6 +40,6 @@ a {
     padding: 6px 12px;
     animation-name: Appear;
     opacity: 0;
-    animation-duration: 3s;
-    animation-delay: 2s;
+    animation-duration: 2s;
+    animation-delay: 1s;
 }
