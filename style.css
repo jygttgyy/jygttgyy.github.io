@@ -38,8 +38,9 @@ a {
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    animation-name: Appear;
     opacity: 0;
+    animation-name: Appear;
     animation-duration: 2s;
     animation-delay: 1s;
+    animation-fill-mode: forwards;
 }
