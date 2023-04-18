@@ -1,60 +1,60 @@
-<!DOCTYPE html> 
- <html> 
-     <head style="background-color: rgb(40, 40, 40);"> 
-         <title>jygttgyy's official webpage</title> 
-         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-         <link rel="stylesheet" href="style.css"> 
-         <link rel="icon" type="image/x-icon" href="PfP_R.ico"> 
-     </head> 
-     <body style="background-color: rgb(50, 50, 50);"> 
-         <nav class="tab"> 
-             <button class="tablinks active" onclick="openSection(event, 'Home')">Home</button> 
-             <button class="tablinks" onclick="openSection(event, 'Languages')">Languages</button> 
-             <button class="tablinks" onclick="openSection(event, 'Delta Dev.')">Delta Dev.</button> 
-             <a class="tablinks" target="_blank" href="https://discord.gg/eyT56H4sux">Discord</a> 
-         </nav> 
-         <div id="Home" class="tabcontent" style="display: block;"> 
-             <h1>Home</h1> 
-             <p> 
-                 Welcome to jygttgyy's official website!<br> 
-                 Here's a list of all the things on this website: 
-             </p> 
-             <ul> 
-                 <li>Most informations about anything related to the Delta Dev. group.</li> 
-                 <li>Basic informations not related.</li> 
-             </ul> 
-         </div> 
-         <div id="Languages" class="tabcontent"> 
-             <h1>Languages</h1> 
-             <button class="language" onclick="openLanguage('en')">English</button> 
-             <button class="language" onclick="openLanguage('fr')">Français</button> 
-         </div> 
-         <div id="Delta Dev." class="tabcontent"> 
-             <h1>Delta Dev.</h1> 
-             <a target="_blank" href="https://www.roblox.com/games/12882884124">Bear game under development</a> 
-             <h2>Patch notes:</h2> 
-             <ul> 
-                 <li>Added lobby!</li> 
-                 <li>Idk...</li> 
-             </ul> 
-         </div> 
-     </body> 
- </html> 
- <script> 
-     function openSection(event, cityName) { 
-         var i, tabcontent, tablinks; 
-         tabcontent = document.getElementsByClassName("tabcontent"); 
-         for (i = 0; i < tabcontent.length; i++) { 
-             tabcontent[i].style.display = "none"; 
-         }; 
-         tablinks = document.getElementsByClassName("tablinks"); 
-         for (i = 0; i < tablinks.length; i++) { 
-             tablinks[i].className = tablinks[i].className.replace(" active", ""); 
-         }; 
-         document.getElementById(cityName).style.display = "block"; 
-         event.currentTarget.className += " active"; 
-         }; 
-     function openLanguage(language) { 
-         window.location.replace(language + ".html") 
-     } 
- </script>
+<!DOCTYPE html>
+<html>
+    <head style="background-color: rgb(40, 40, 40);">
+        <title>Site officiel de jygttgyy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="PfP_R.ico">
+    </head>
+    <body style="background-color: rgb(50, 50, 50);">
+        <nav class="tab">
+            <button class="tablinks active" onclick="openSection(event, 'Home')">Menu</button>
+            <button class="tablinks" onclick="openSection(event, 'Languages')">Langues</button>
+            <button class="tablinks" onclick="openSection(event, 'Delta Dev.')">Delta Dev.</button>
+            <a class="tablinks" target="_blank" href="https://discord.gg/eyT56H4sux">Discord</a>
+        </nav>
+        <div id="Home" class="tabcontent" style="display: block;">
+            <h1>Menu</h1>
+            <p>
+                Bienvenue sur le site officiel de jygttgyy!<br>
+                Voici une liste de toutes les choses que vous trouverez sur ce site:
+            </p>
+            <ul>
+                <li>La majorité des informations relatées au groupe Delta Dev.</li>
+                <li>Des informations basiques non-relatées.</li>
+            </ul>
+        </div>
+        <div id="Languages" class="tabcontent">
+            <h1>Langues</h1>
+            <button class="language" onclick="openLanguage('en')">English</button>
+            <button class="language" onclick="openLanguage('fr')">Français</button>
+        </div>
+        <div id="Delta Dev." class="tabcontent">
+            <h1>Delta Dev.</h1>
+            <a target="_blank" href="https://www.roblox.com/games/12882884124">Bear game under development</a>
+            <h2>Patchs:</h2>
+            <ul>
+                <li>Lobby ajouté!</li>
+                <li>Jsp...</li>
+            </ul>
+        </div>
+    </body>
+</html>
+<script>
+    function openSection(event, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        };
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        };
+        document.getElementById(cityName).style.display = "block";
+        event.currentTarget.className += " active";
+        };
+    function openLanguage(language) {
+        window.location.replace(language + ".html")
+    }
+</script>
