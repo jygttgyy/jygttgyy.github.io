@@ -4,17 +4,17 @@
 }
 body {
     font-family: Verdana;
-    color: rgb(230, 230, 230);
+    color: rgb(200, 200, 200);
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(40, 40, 40);
-    animation-name: Appear;
-    animation-duration: 3s;
 }
 .tab {
     overflow: auto;
     border: 1px solid rgb(30, 30, 30);
     border-radius: 8px;
     background-color: rgb(70, 70, 70);
+    animation-name: Appear;
+    animation-duration: 3s;
 }
 .tab button, .tab a {
     background-color: inherit;
@@ -38,4 +38,7 @@ a {
 .tabcontent {
     display: none;
     padding: 6px 12px;
+    animation-name: Appear;
+    animation-duration: 3s;
+    animation-delay: 2s;
 }
