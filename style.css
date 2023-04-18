@@ -4,6 +4,7 @@
 }
 body {
     font-family: Verdana;
+    color: rgb(230, 230, 230);
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(40, 40, 40);
     animation-name: Appear;
