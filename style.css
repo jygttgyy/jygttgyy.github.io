@@ -1,5 +1,6 @@
 body {
-    font-family: Arial;
+    font-family: Verdana;
+    text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(40, 40, 40);
 }
 .tab {
@@ -21,7 +22,7 @@ body {
     font-size: 17px;
 }
 a {
-    color: rgb(0, 100, 255);
+    color: rgb(0, 140, 200);
 }
 .tab button:hover, .tab a:hover {
     background-color: rgb(60, 60, 60);
