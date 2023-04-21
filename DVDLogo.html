@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jygttgyy's official webpage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style = "background-color: #242424;">
+        <button id="IMG1" style="position: fixed;"><img src="menu-icon.png"></button>
+    </body>
+    <style>
+        @keyframes Pos1 {
+            from {bottom: 400; right: 0}
+            to {bottom: 800; right: 650}
+        };
+        @keyframes Pos2 {
+            from {bottom: 800; right: 650}
+            to {bottom: 400; right: 1300}
+        };
+        @keyframes Pos3 {
+            from {bottom: 400; right: 1300}
+            to {bottom: 0; right: 650}
+        };
+        @keyframes Pos4 {
+            from {bottom: 0; right: 650}
+            to {bottom: 400; right: 0}
+        };
+        #IMG1 {
+            animation-name: Pos1;
+            animation-duration: 5s;
+        }
+        #IMG2 {
+            animation-name: Pos2;
+            animation-duration: 5s;
+        }
+        #IMG3 {
+            animation-name: Pos3;
+            animation-duration: 5s;
+        }
+        #IMG4 {
+            animation-name: Pos4;
+            animation-duration: 5s;
+        }
+    </style>
+    <script>
+        function waitMs(milliseconds) {
+            const date = Date.now();
+            let currentDate = null;
+            do {
+                currentDate = Date.now();
+            } while (currentDate - date < milliseconds);
+        }
+        var Num = 1;
+        const Elem = document.getElementById("IMG1");
+        while (true) {
+            Num += 1
+            if (Num === 5) {
+                Num = 1
+            }
+            waitMs(5000);
+            document.getElementById("IMG" + toString(Num - 1)).id = "IMG" + toString(Num)
+        };
+    </script>
+</html>
