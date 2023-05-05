@@ -28,9 +28,9 @@
     var Language = navigator.language || navigator.userLanguage;
     var UserLanguage = Language.slice(0, 2);
     if (FileExist(UserLanguage + ".html") === true) {
-        window.location.replace(UserLanguage + ".html");
+        window.location.replace(UserLanguage + "/main.html");
     } else {
-        window.location.replace("en.html");
+        window.location.replace("en/main.html");
     }
 </script>
 <style>
