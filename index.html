@@ -34,9 +34,9 @@
     var Language = navigator.language || navigator.userLanguage;
     var UserLanguage = Language.slice(0, 2);
     if (FileExist(UserLanguage + ".html") === true) {
-        window.location.replace(UserLanguage + "/" + ismobile + ".html");
+        window.location.replace(UserLanguage + "/" + isMobile + ".html");
     } else {
-        window.location.replace("en/" + ismobile + ".html");
+        window.location.replace("en/" + isMobile + ".html");
     }
 </script>
 <style></style>
