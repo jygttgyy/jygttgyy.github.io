@@ -28,7 +28,9 @@ body {
 }
 a {
     color: rgb(0, 140, 200);
+    text-decoration: none;
 }
+
 .tab button:hover, .tab a:hover {
     background-color: rgb(60, 60, 60);
 }
