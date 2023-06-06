@@ -8,6 +8,16 @@ body {
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(40, 40, 40);
 }
+button {
+    background-color: rgb(70, 70, 70);
+    float: left;
+    border: 1px solid rgb(30, 30, 30);
+    outline: none;
+    cursor: pointer;
+    padding: 12px 10px;
+    transition: 0.3s;
+    font-size: 17px;
+}
 .tab {
     overflow: auto;
     border: 1px solid rgb(30, 30, 30);
