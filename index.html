@@ -7,8 +7,8 @@
         <meta property="og:description" content="This is jygttgyy's official website, also contains the Delta Dev. infos." />
         <meta property="og:url" content="https://jygttgyy.github.io/" />
         <meta property="og:image" content=""/>
-        <link rel="stylesheet" href="../style.css">
-        <link rel="icon" type="image/x-icon" href="PfP_R.ico">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="Images/PfP_R.ico">
     </head>
     <body>
         <h1>Delta Dev.</h1>
@@ -36,7 +36,7 @@
         var Language = navigator.language || navigator.userLanguage;
         var UserLanguage = Language.slice(0, 2);
         if (FileExist(UserLanguage + ".html") === true) {
-            window.location.replace(UserLanguage + "/" + Device + ".html");
+            window.location.replace(UserLanguage + "/" + Device);
         } else {
             window.location.replace("en/" + Device);
         }

@@ -12,5 +12,29 @@ function openSection(event, cityName) {
     event.currentTarget.className += " active";
     };
 function openLanguage(language) {
-    window.location.replace("../" + language + "/main.html")
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            var Device = "mobile"
+        } else {
+            var Device = "main"
+        }
+    window.location.replace("../" + language + "/" + Device)
+}
+document.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.keyCode === 69) {
+      rainbow()
+    } else if (event.isComposing || event.ctrlKey === true) {
+        if (event.isComposing || event.keyCode === 66) {
+            window.location.replace("../sus")
+        }
+    }
+});
+function rainbow() {
+    var headTag = document.getElementsByTagName('head')[0]
+    const linkforCSSfile = document.createElement("link")
+    linkforCSSfile.href = '../rainbow.css'
+    linkforCSSfile.type = 'text/css'
+    linkforCSSfile.rel = 'stylesheet'
+    headTag.appendChild(linkforCSSfile);
+    document.body.appendChild(headTag);
 }
