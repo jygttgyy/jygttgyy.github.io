@@ -1,0 +1,76 @@
+/* Feuille de style */
+@keyframes Rainbow {
+    0% {background-color: red;}
+    14% {background-color: orange;}
+    28% {background-color: yellow;}
+    42% {background-color: green;}
+    56% {background-color: blue;}
+    70% {background-color: indigo;}
+    84% {background-color: violet;}
+    100% {background-color: red;}
+}
+@keyframes Blind {
+	from{background-color: white;}
+	to{background-color: black;}
+}
+@keyframes No-Blind {
+	from{background-color: black;}
+	to{background-color: white;}
+}
+@keyframes Rotate {
+	from{transform: rotate(0deg);}
+	to{transform: rotate(359.99deg);}
+}
+@keyframes App {
+	from{
+		width: 100%;
+		transform: rotate(0deg);
+		opacity: 10%
+	}
+	to{
+		width: 10%;
+		transform: rotate(359.99deg);
+		opacity: 80%
+	}
+}
+mark {
+	animation-name: Blind;
+   	animation-duration: 1s;
+	animation-direction: alternate;
+   	animation-iteration-count: infinite;
+}
+button {
+	animation-name: Rotate;
+   	animation-duration: 1s;
+	animation-direction: alternate;
+   	animation-iteration-count: infinite;
+}
+p {
+	animation-name: No-Blind;
+   	animation-duration: 0.2s;
+	animation-direction: alternate;
+   	animation-iteration-count: infinite;
+}
+a {
+	animation-name: No-Blind;
+   	animation-duration: 0.2s;
+	animation-direction: alternate;
+   	animation-iteration-count: infinite;
+}
+body {
+    margin: 0 0 0 0;
+    animation-name: Rainbow;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+body > * {
+	animation-name: Rotate;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
+img {
+	animation-name: App;
+	animation-duration: 3s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
