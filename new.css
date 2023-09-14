@@ -62,5 +62,5 @@ a {
     width: 100%;
 }
 .sticky + .content {
-    padding-top: 20px;
+    padding-top: 18px;
 }
