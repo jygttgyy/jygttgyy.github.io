@@ -57,10 +57,10 @@ a {
     padding: 16px;
 }
 .sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
 }
 .sticky + .content {
-    padding-top: 102px;
+    padding-top: 20px;
 }
