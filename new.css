@@ -27,7 +27,7 @@ a {
     font-size: 100%;
 }
 .header {
-    column-count: 5;
+    column-count: 4;
     column-gap: 0px;
     background: #555;
     color: rgb(50, 10, 10);
