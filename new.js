@@ -14,7 +14,7 @@ document.getElementById("discordButton").onclick = function() {
 
 
 var mainContent = document.getElementById("mainContent");
-var delta_devContentContent = document.getElementById("delta_devContent");
+var delta_devContent = document.getElementById("delta_devContent");
 var bearContent = document.getElementById("bearContent");
 document.getElementById("mainButton").onclick = function() {
 	if (mainContent.style.display === "none") {
