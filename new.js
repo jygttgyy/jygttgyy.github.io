@@ -8,11 +8,14 @@ window.onscroll = function() {
 		header.classList.remove("sticky");
 	}
 }
+document.getElementById("discordButton").onclick = function() {
+	window.open("https://discord.gg/eyT56H4sux", "_blank");
+}
+
 
 var mainContent = document.getElementById("mainContent");
 var delta_devContentContent = document.getElementById("delta_devContent");
 var bearContent = document.getElementById("bearContent");
-
 document.getElementById("mainButton").onclick = function() {
 	if (mainContent.style.display === "none") {
 		delta_devContent.style.display = "none";
