@@ -17,7 +17,7 @@ var mainContent = document.getElementById("mainContent");
 var delta_devContent = document.getElementById("delta_devContent");
 var bearContent = document.getElementById("bearContent");
 document.getElementById("mainButton").onclick = function() {
-	if (mainContent.style.display == "none") {
+	if (mainContent.style.display === "none") {
 		console.log("mainButton: Clicked");
 		delta_devContent.style.display = "none";
 		bearContent.style.display = "none";
@@ -25,7 +25,7 @@ document.getElementById("mainButton").onclick = function() {
 	}
 }
 document.getElementById("delta_devButton").onclick = function() {
-	if (delta_devContent.style.display == "none") {
+	if (delta_devContent.style.display === "none") {
 		console.log("delta_dev_Button: Clicked");
 		mainContent.style.display = "none";
 		bearContent.style.display = "none";
@@ -33,7 +33,7 @@ document.getElementById("delta_devButton").onclick = function() {
 	}
 }
 document.getElementById("bearButton").onclick = function() {
-	if (bearContent.style.display == "none") {
+	if (bearContent.style.display === "none") {
 		console.log("bearButton: Clicked");
 		mainContent.style.display = "none";
 		delta_devContent.style.display = "none";
