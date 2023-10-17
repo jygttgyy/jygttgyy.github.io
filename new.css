@@ -35,11 +35,11 @@ a {
     display: inline-grid;
     grid-template-columns: auto auto auto;*/
 }
-.header:after {
+/*.header:after {
     content: "";
     display: table;
     clear: both;
-}
+}*/
 .sub-header {
     float: left;
     width: 100%;
