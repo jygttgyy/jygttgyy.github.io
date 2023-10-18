@@ -57,6 +57,7 @@ a {
 }
 .content {
     padding: 16px;
+    transition-duration: 0.4s;
 }
 .sticky {
     position: sticky;
