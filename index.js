@@ -15,7 +15,6 @@ document.getElementById("discordButton").onclick = function() {
 	window.open("https://discord.gg/eyT56H4sux", "_blank");
 }
 
-
 var mainContent = document.getElementById("mainContent");
 var delta_devContent = document.getElementById("delta_devContent");
 var bearContent = document.getElementById("bearContent");
@@ -46,3 +45,19 @@ document.getElementById("bearButton").onclick = function() {
 	bearContent.style.opacity = 1;
 	wait(bearContent.style.display = "block", 400);
 }
+
+document.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.keyCode === 69) {
+        var headTag = document.getElementsByTagName('head')[0]
+        const linkforCSSfile = document.createElement("link")
+        linkforCSSfile.href = '../rainbow.css'
+        linkforCSSfile.type = 'text/css'
+        linkforCSSfile.rel = 'stylesheet'
+        headTag.appendChild(linkforCSSfile);
+        document.body.appendChild(headTag);
+    } else if (event.isComposing || event.ctrlKey === true) {
+        if (event.isComposing || event.keyCode === 66) {
+            window.location.replace("../sus")
+        }
+    }
+});
