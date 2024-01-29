@@ -8,6 +8,6 @@ function num0(num) {
 function e() {
     var d = new Date()
     document.getElementById("date").innerText = num0(d.getHours()) + ":" + num0(d.getMinutes()) + ":" + num0(d.getSeconds()) + "\n" + d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear();
-    setTimeout(e, 100);
+    setTimeout(e, 1);
 }
 e();

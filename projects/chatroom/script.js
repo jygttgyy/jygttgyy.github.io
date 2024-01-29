@@ -8,7 +8,7 @@ var container = document.getElementById("container");
 var cooldown = false;
 var messages = [];
 function GetMessages() {
-    fetch(window.location.href + "-action").then((response) => {
+    fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action").then((response) => {
 	    if (!response.ok) {
 		    throw new Error(`HTTP error: ${response.status}`);
 	    }
@@ -38,7 +38,7 @@ button.onclick = function() {
 	if (!cooldown) {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
-        fetch(window.location.href + "-action", {
+        fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
 	        method: "POST",
 	        body: JSON.stringify({
 	        	username: username_input.value,
