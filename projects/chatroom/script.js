@@ -30,7 +30,7 @@ function GetMessages() {
 			current += 1; last_msg += 1;
 		}
 		target_length = null;
-		setTimeout(GetMessages, 1000);
+		GetMessages();
 	}).catch((error) => {
 		console.log(error);
 	});
@@ -44,7 +44,7 @@ function SendMessage() {
 	        method: "POST",
 	        body: JSON.stringify({
 	        	username: username_input.value,
-	        	content: input.value.slice(0, 256),
+	        	content: input.value.slice(0, 1024),
 	        }),
 	        headers: {
 	        	"Content-type": "application/json; charset=UTF-8"
