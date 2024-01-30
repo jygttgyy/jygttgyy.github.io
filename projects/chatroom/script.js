@@ -54,6 +54,7 @@ function SendMessage() {
 			mode: 'no-cors'
 	    })
 	}
+	console.log("sending message");
 	input.value = "";
 }
 button.onclick = SendMessage();
