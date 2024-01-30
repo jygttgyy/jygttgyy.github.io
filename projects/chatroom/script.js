@@ -23,9 +23,9 @@ function GetMessages() {
 			messages.push(message);
 			var new_msg = msg.cloneNode(true);
 			new_msg.id = "msg_" + last_msg;
+			container.appendChild(new_msg);
 			new_msg.getElementById("username").innerText = message[0];
 			new_msg.getElementById("content").innerText = message[1];
-			container.appendChild(new_msg);
 			new_msg = null;
 			current += 1; last_msg += 1;
 		}
