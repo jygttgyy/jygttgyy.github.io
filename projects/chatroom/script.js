@@ -1,9 +1,9 @@
 var input = document.getElementById("input");
 var username_input = document.getElementById("username_input");
 var button = document.getElementById("send");
-var msg = document.getElementById("message_template").cloneNode();
-msg.id = "message";
-document.getElementById("message_template").remove();
+var msg = document.getElementById("msg_template").cloneNode();
+msg.id = "msg";
+document.getElementById("msg_template").remove();
 var container = document.getElementById("messages");
 var cooldown = false;
 var messages = [];
@@ -23,7 +23,8 @@ function GetMessages() {
 			messages.push(message);
 			var new_msg = msg.cloneNode();
 			new_msg.id = "msg_" + last_msg;
-			new_msg.innerText = message[0] + " | " + message[1];
+			new_msg.getElementById("username").innerText = message[0];
+			new_msg.getElementById("content").innerText = message[1];
 			container.appendChild(new_msg);
 			new_msg = null;
 			current += 1; last_msg += 1;
