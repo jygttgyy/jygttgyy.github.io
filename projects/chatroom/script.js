@@ -21,7 +21,7 @@ function GetMessages() {
 		while (messages.length < j.length) {
 			var message = j[current];
 			messages.push(message);
-			var new_msg = msg.cloneNode();
+			var new_msg = msg.cloneNode(true);
 			new_msg.id = "msg_" + last_msg;
 			new_msg.getElementById("username").innerText = message[0];
 			new_msg.getElementById("content").innerText = message[1];
