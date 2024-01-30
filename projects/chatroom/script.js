@@ -36,9 +36,6 @@ function GetMessages() {
 	});
 }
 GetMessages();
-input.onclick = function() {
-	input.value = "";
-}
 function SendMessage() {
 	if (!cooldown) {
 		cooldown = true;
@@ -55,12 +52,10 @@ function SendMessage() {
 			mode: 'no-cors'
 	    })
 	}
-	console.log("sending message");
 	input.value = "";
 }
-button.onclick = function() {
-	SendMessage();
-};
+input.addEventListener("click", function() {input.value = "";})
+button.addEventListener("click", SendMessage)
 document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && input.checked) {
         SendMessage();
