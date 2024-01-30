@@ -15,10 +15,13 @@ body {
     border-radius: 0px, 0px, 10px, 10px;
 }
 #username-container {
-    width: 10%;
-    border-radius: 10px, 0px, 0px, 10px;
+    width: 15%;
+    /*border-radius: 10px, 0px, 0px, 10px;*/
 }
 #content-container {
-    width: 90%;
-    border-radius: 0px, 10px, 10px, 0px;
+    width: 85%;
+    /*border-radius: 0px, 10px, 10px, 0px;*/
+}
+#new_message_template {
+    display: flex;
 }
