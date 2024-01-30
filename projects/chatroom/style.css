@@ -32,14 +32,14 @@ input:hover, button:hover {
 }
 #username_input {
     width: 15%;
-    border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 10px;
 }
 #input {
     width: 75%;
 }
 #send {
     width: 10%;
-    border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 10px;
 }
 #content {
     margin: 10px;
