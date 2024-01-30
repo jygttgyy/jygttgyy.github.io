@@ -4,16 +4,16 @@ body {
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(50, 50, 50);
 }
-div {
-    stroke-width: 2px;
-    stroke: rgb(70, 70, 70);
-}
 #container {
     width: 90%;
     margin: auto;
     border-radius: 10px;
+    stroke-width: 2px;
+    stroke: rgb(70, 70, 70);
 }
 #message_box {
     width: 100%;
     border-radius: 0px, 0px, 10px, 10px;
+    stroke-width: 2px;
+    stroke: rgb(70, 70, 70);
 }
