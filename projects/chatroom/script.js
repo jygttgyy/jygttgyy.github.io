@@ -34,6 +34,9 @@ function GetMessages() {
 	});
 }
 GetMessages();
+input.onclick = function() {
+	input.value = "";
+}
 function SendMessage() {
 	if (!cooldown) {
 		cooldown = true;

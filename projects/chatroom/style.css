@@ -5,3 +5,8 @@ body {
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(50, 50, 50);
 }
+#container {
+    border-radius: 10px;
+    stroke-width: 2px;
+    stroke: rgb(70, 70, 70);
+}
