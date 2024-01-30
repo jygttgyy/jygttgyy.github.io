@@ -60,12 +60,12 @@ function SendMessage() {
 	if (cooldown === false) {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
-		var id = getCookie("id")
+		var id = getCookie("id");
 		if (id != "") {
 			function e() {
-				return toString(Math.round(Math.random()))
+				return toString(Math.round(Math.random()));
 			}
-			id = e() + e() + e() + e()
+			id = e() + e() + e() + e();
 			setCookie("id", id, 365);
 		}
         fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
