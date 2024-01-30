@@ -24,8 +24,8 @@ function GetMessages() {
 			var new_msg = msg.cloneNode(true);
 			new_msg.id = "msg_" + last_msg;
 			container.appendChild(new_msg);
-			new_msg.querySelector("#username").innerText = message[0];
-			new_msg.querySelector("#content").innerText = message[1];
+			new_msg.querySelector("#username").innerText = "@" + message[0] + " " + message[1];
+			new_msg.querySelector("#content").innerText = message[2];
 			new_msg = null;
 			current += 1; last_msg += 1;
 		}
@@ -36,14 +36,42 @@ function GetMessages() {
 	});
 }
 GetMessages();
+function setCookie(cname, cvalue, exdays) {
+	const d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	let expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+} 
+function getCookie(cname) {
+	let name = cname + "=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
 function SendMessage() {
 	if (cooldown === false) {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
+
+		if (getCookie("id") != "") {
+			function e() {
+				return toString(Math.round(Math.random()))
+			}
+			setCookie("id", e() + e() + e() + e(), 365);
+		}
         fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
 	        method: "POST",
 	        body: JSON.stringify({
-	        	username: username_input.value,
+				id: getCookie("id"),
+	        	username: username_input.value.replace(/\s+/g, ''),
 	        	content: input.value.slice(0, 1024),
 	        }),
 	        headers: {
