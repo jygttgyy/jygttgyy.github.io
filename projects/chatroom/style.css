@@ -10,6 +10,12 @@ div {
     stroke-width: 2px;
     stroke: rgb(70, 70, 70);
 }
-#message_box {
+#container {
+    width: 90%;
+    margin: auto;
     
+}
+#message_box {
+    width: 100%;
+
 }
