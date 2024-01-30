@@ -56,6 +56,10 @@ function SendMessage() {
 }
 input.addEventListener("click", function() {input.value = "";})
 button.addEventListener("click", SendMessage)
+document.onload = function() {
+	var height = window.innerHeight;
+	
+}
 document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && document.activeElement == input) {
         SendMessage();
