@@ -57,7 +57,7 @@ function SendMessage() {
 	console.log("sending message");
 	input.value = "";
 }
-button.onclick = SendMessage();
+button.onclick = SendMessage;
 document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && input.checked) {
         SendMessage();
