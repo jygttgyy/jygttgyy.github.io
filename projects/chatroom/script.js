@@ -8,7 +8,7 @@ var container = document.getElementById("messages");
 var cooldown = false;
 var messages = [];
 var last_msg = 0;
-class msg {
+/*class msg {
 	constructor(message, username, content, id) {
 		this.message = message;
 		this.username = username;
@@ -18,7 +18,7 @@ class msg {
 			return new msg(this.message, this.username, this.content, this.id);
 		}
 	}
-}
+}*/
 function GetMessages() {
     fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action").then((response) => {
 	    if (!response.ok) {
