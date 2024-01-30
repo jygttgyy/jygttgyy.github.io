@@ -40,7 +40,7 @@ function SendMessage() {
 	if (!cooldown) {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
-        /*fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
+        fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
 	        method: "POST",
 	        body: JSON.stringify({
 	        	username: username_input.value,
@@ -50,14 +50,31 @@ function SendMessage() {
 	        	"Content-type": "application/json; charset=UTF-8"
 	        },
 			mode: 'no-cors'
-	    })*/
+	    })
 	}
 	input.value = "";
 }
 input.addEventListener("click", function() {input.value = "";})
-button.addEventListener("click", SendMessage)
-document.addEventListener("keydown", (event) => {
+button.addEventListener("click", function() {
+	if (!cooldown) {
+		cooldown = true;
+		setTimeout(function() {cooldown = false;}, 500);
+        fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
+	        method: "POST",
+	        body: JSON.stringify({
+	        	username: username_input.value,
+	        	content: input.value.slice(0, 256),
+	        }),
+	        headers: {
+	        	"Content-type": "application/json; charset=UTF-8"
+	        },
+			mode: 'no-cors'
+	    })
+	}
+	input.value = "";
+})
+/*document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && input.checked) {
         SendMessage();
     }
-});
+});*/
