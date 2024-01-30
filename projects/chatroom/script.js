@@ -8,6 +8,17 @@ var container = document.getElementById("messages");
 var cooldown = false;
 var messages = [];
 var last_msg = 0;
+class msg {
+	constructor(message, username, content, id) {
+		this.message = message;
+		this.username = username;
+		this.content = content;
+		this.id = id;
+		this.clone() = function() {
+			return new msg(this.message, this.username, this.content, this.id);
+		}
+	}
+}
 function GetMessages() {
     fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action").then((response) => {
 	    if (!response.ok) {
@@ -24,8 +35,8 @@ function GetMessages() {
 			var new_msg = msg.cloneNode(true);
 			new_msg.id = "msg_" + last_msg;
 			container.appendChild(new_msg);
-			new_msg.getElementById("username").innerText = message[0];
-			new_msg.getElementById("content").innerText = message[1];
+			new_msg.querySelector("#username").innerText = message[0];
+			new_msg.querySelector("#content").innerText = message[1];
 			new_msg = null;
 			current += 1; last_msg += 1;
 		}
