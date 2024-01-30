@@ -6,6 +6,9 @@ body {
     background-color: rgb(50, 50, 50);
     margin: 2%;
 }
+body * {
+    font-size: inherit
+}
 input, button {
     font-family: Verdana;
     padding: 10px;
