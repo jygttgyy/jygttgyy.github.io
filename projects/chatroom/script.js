@@ -1,7 +1,7 @@
 var input = document.getElementById("input");
 var username_input = document.getElementById("username_input");
 var button = document.getElementById("send");
-var msg = document.getElementById("msg_template").cloneNode();
+var msg = document.getElementById("msg_template").cloneNode(true);
 msg.id = "msg";
 document.getElementById("msg_template").remove();
 var container = document.getElementById("messages");
