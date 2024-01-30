@@ -56,8 +56,8 @@ function SendMessage() {
 }
 input.addEventListener("click", function() {input.value = "";})
 button.addEventListener("click", SendMessage)
-/*document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && input.checked) {
         SendMessage();
     }
-});*/
+});
