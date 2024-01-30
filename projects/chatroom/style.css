@@ -3,6 +3,7 @@ body {
     color: rgb(200, 200, 200);
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(50, 50, 50);
+    margin: 2%;
 }
 input, button {
     font-family: Verdana;
@@ -21,6 +22,12 @@ input:hover, button:hover {
     margin: auto;
     border-radius: 10px;
     background-color: rgb(70, 70, 70);
+}
+#messages {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    overflow: hidden;
 }
 #message_box {
     width: 100%;
