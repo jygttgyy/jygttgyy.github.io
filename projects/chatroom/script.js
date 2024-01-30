@@ -34,7 +34,7 @@ function GetMessages() {
 	});
 }
 GetMessages();
-button.onclick = function() {
+function SendMessage() {
 	if (!cooldown) {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
@@ -48,12 +48,13 @@ button.onclick = function() {
 	        	"Content-type": "application/json; charset=UTF-8"
 	        },
 			mode: 'no-cors'
-	    }).then((response) => {
-		    if (!response.ok) {
-		    	throw new Error(`HTTP error: ${response.status}`);
-		    }
-		    console.log("Success sending message!");
-        })
+	    })
 	}
 	input.value = "";
 }
+button.onclick = SendMessage();
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Enter" && input.checked) {
+        SendMessage();
+    }
+});

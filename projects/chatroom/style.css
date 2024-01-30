@@ -1,0 +1,7 @@
+body {
+    margin: 0;
+    font-family: Verdana;
+    color: rgb(200, 200, 200);
+    text-shadow: 1px 1px rgb(30, 30, 30);
+    background-color: rgb(50, 50, 50);
+}
