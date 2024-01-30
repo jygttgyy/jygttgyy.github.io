@@ -7,6 +7,7 @@ document.getElementById("message_template").remove();
 var container = document.getElementById("container");
 var cooldown = false;
 var messages = [];
+var last_msg = 0;
 function GetMessages() {
     fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action").then((response) => {
 	    if (!response.ok) {
@@ -21,11 +22,11 @@ function GetMessages() {
 			var message = j[current];
 			messages.push(message);
 			var new_msg = msg.cloneNode();
-			new_msg.id = "msg";
+			new_msg.id = "msg_" + last_msg;
 			new_msg.innerText = message[0] + " | " + message[1];
 			container.appendChild(new_msg);
 			new_msg = null;
-			current += 1;
+			current += 1; last_msg += 1;
 		}
 		target_length = null;
 		setTimeout(GetMessages, 1000);
