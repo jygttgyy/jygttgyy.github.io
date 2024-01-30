@@ -46,7 +46,8 @@ button.onclick = function() {
 	        }),
 	        headers: {
 	        	"Content-type": "application/json; charset=UTF-8"
-	        }
+	        },
+			mode: 'no-cors'
 	    }).then((response) => {
 		    if (!response.ok) {
 		    	throw new Error(`HTTP error: ${response.status}`);
