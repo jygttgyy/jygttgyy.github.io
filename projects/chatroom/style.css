@@ -8,6 +8,7 @@ input, button {
     font-family: Verdana;
     padding: 10px;
     color: rgb(200, 200, 200);
+    border: 0px;
     text-shadow: 1px 1px rgb(30, 30, 30);
     background-color: rgb(80, 80, 80);
 }
