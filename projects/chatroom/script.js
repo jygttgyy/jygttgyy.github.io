@@ -73,8 +73,8 @@ button.addEventListener("click", function() {
 	}
 	input.value = "";
 })
-/*document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && input.checked) {
         SendMessage();
     }
-});*/
+});
