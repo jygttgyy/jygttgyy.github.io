@@ -30,7 +30,7 @@ function GetMessages() {
 			current += 1; last_msg += 1;
 		}
 		target_length = null;
-		GetMessages();
+		setTimeout(GetMessages, 10);
 	}).catch((error) => {
 		console.log(error);
 	});
