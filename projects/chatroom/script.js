@@ -4,7 +4,7 @@ var button = document.getElementById("send");
 var msg = document.getElementById("message_template").cloneNode();
 msg.id = "message";
 document.getElementById("message_template").remove();
-var container = document.getElementById("container");
+var container = document.getElementById("messages");
 var cooldown = false;
 var messages = [];
 var last_msg = 0;
