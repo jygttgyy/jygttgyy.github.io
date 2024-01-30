@@ -60,17 +60,18 @@ function SendMessage() {
 	if (cooldown === false) {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
-
-		if (getCookie("id") != "") {
+		var id = getCookie("id")
+		if (id != "") {
 			function e() {
 				return toString(Math.round(Math.random()))
 			}
-			setCookie("id", e() + e() + e() + e(), 365);
+			id = e() + e() + e() + e()
+			setCookie("id", id, 365);
 		}
         fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
 	        method: "POST",
 	        body: JSON.stringify({
-				id: getCookie("id"),
+				id: id,
 	        	username: username_input.value.replace(/\s+/g, ''),
 	        	content: input.value.slice(0, 1024),
 	        }),
