@@ -61,7 +61,6 @@ function SendMessage() {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
 		var id = getCookie("id");
-		id = "";
 		if (id == "") {
 			id = "" + Math.round(Math.random() * 9) + Math.round(Math.random() * 9) + Math.round(Math.random() * 9) + Math.round(Math.random() * 9);
 			setCookie("id", id, 365);
