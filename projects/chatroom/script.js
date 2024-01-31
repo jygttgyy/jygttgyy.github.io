@@ -69,7 +69,7 @@ function SendMessage() {
 	        method: "POST",
 	        body: JSON.stringify({
 				id: id,
-	        	username: username_input.value.replace(/\s+/g, ''),
+	        	username: username_input.value.replace(/\s+/g, '').slice(0, 20),
 	        	content: input.value.slice(0, 1024),
 	        }),
 	        headers: {
