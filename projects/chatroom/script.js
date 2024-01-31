@@ -61,7 +61,7 @@ function SendMessage() {
 		cooldown = true;
 		setTimeout(function() {cooldown = false;}, 500);
 		var id = getCookie("id");
-		if (id != "") {
+		if (id == "") {
 			function e() {
 				return toString(Math.round(Math.random()));
 			}
