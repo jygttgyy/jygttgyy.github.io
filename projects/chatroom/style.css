@@ -32,6 +32,9 @@ input:hover, button:hover {
     flex-direction: column;
     overflow: hidden;
 }
+#messages div {
+    display: flex;
+}
 #message_box {
     width: 100%;
     display: flex;
