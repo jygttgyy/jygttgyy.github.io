@@ -57,7 +57,7 @@ document.addEventListener("keydown", (event) => {
         document.body.appendChild(headTag);
     } else if (event.isComposing || event.ctrlKey === true) {
         if (event.isComposing || event.keyCode === 66) {
-            window.location.replace("../sus")
+            window.location.replace("../sus/sus.html")
         }
     }
 });
