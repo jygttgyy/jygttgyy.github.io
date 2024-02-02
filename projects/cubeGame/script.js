@@ -163,7 +163,7 @@ function ToggleVisible() {
     }
 }
 async function Get() {
-	fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/get").then((response) => {
+	fetch("https://jygttgyy.up.railway.app/get").then((response) => {
 		if (!response.ok) {
     		throw new Error(`HTTP error: ${response.status}`);
 		}
