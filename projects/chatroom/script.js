@@ -87,8 +87,20 @@ height -= height * 0.02
 height = Math.floor(((height - 115)/39) * 39)
 document.getElementById("messages").style.height = height + "px";
 height = null;
+var ctrlL = false, dollar = false; 
 document.addEventListener("keydown", (event) => {
     if (event.code === "Enter" && document.activeElement == input) {
         SendMessage();
-    }
+    } else if (event.code === "ControlLeft") {
+		ctrlL = true;
+	} else if (event.code === "BracketRight") {
+		dollar = true;
+	}
+});
+document.addEventListener("keyup", (event) => {
+    if (event.code === "ControlLeft") {
+		ctrlL = false;
+	} else if (event.code === "BracketRight") {
+		dollar = false;
+	}
 });
