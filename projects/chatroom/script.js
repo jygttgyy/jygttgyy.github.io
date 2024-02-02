@@ -9,7 +9,7 @@ var cooldown = false;
 var messages = [];
 var last_msg = 0;
 function GetMessages() {
-    fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action").then((response) => {
+    fetch("https://jygttgyy.up.railway.app/chat-action").then((response) => {
 	    if (!response.ok) {
 		    throw new Error(`HTTP error: ${response.status}`);
 	    }
@@ -65,7 +65,7 @@ function SendMessage() {
 			id = "" + Math.round(Math.random() * 9) + Math.round(Math.random() * 9) + Math.round(Math.random() * 9) + Math.round(Math.random() * 9);
 			setCookie("id", id, 365);
 		}
-        fetch("https://d9e1c188-384c-42e5-9a5e-5c096db06ef5-00-1sqcje727ojhp.picard.replit.dev/chat-action", {
+        fetch("https://jygttgyy.up.railway.app/chat-action", {
 	        method: "POST",
 	        body: JSON.stringify({
 				id: id,
