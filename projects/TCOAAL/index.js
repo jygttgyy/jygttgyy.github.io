@@ -41,13 +41,9 @@ for (let button in buttons) {
 class funcReturn {
     constructor(time = 0, event = null) { // Object AND Event
         if (event != null) {
-            this.wait = async function() {
-                await waitUntilEvent(event[0], event[1]);
-            }
+            this.wait = waitUntilEvent(event[0], event[1]);
         } else {
-            this.wait = async function() {
-                await wait(time);
-            }
+            this.wait = wait(time);
         }
     }
 }
