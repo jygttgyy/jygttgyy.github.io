@@ -1,10 +1,18 @@
-const wait = (n) => new Promise((resolve) => setTimeout(resolve, n * 1000));
+const wait = (n = 1) => new Promise((resolve) => setTimeout(resolve, n * 1000));
 const waitUntilEvent = (obj, event) => new Promise((resolve) => {
     const listener = () => {
         obj.removeEventListener(event, listener);
         resolve();
     }
     obj.addEventListener(event, listener);
+})
+const waitUntilKeyPressed = (key) => new Promise((resolve) => {
+    Arrow(true);
+    SetOnInput(key, function() {
+        SetOnInput(key);
+        Arrow(false);
+        resolve();
+    })
 })
 const audios = {
     soundEffects: {
@@ -38,16 +46,7 @@ let buttons = document.querySelectorAll("button");
 for (let button in buttons) {
     buttons[button].disabled = true;
 }
-class funcReturn {
-    constructor(time = 0, event = null) { // Object AND Event
-        if (event != null) {
-            this.wait = waitUntilEvent(event[0], event[1]);
-        } else {
-            this.wait = wait(time);
-        }
-    }
-}
-function PlayAudio(name, type = "soundEffects", callback) {
+const PlayAudio = (name, type = "soundEffects") => new Promise((resolve) => {
     if (!audios[type]) {
         console.warn(`Invalid type specified: "${type}"\nIgnoring PlayAudio request.`);
         return 0;
@@ -57,28 +56,37 @@ function PlayAudio(name, type = "soundEffects", callback) {
     }
     audios[type][name].currentTime = 0;
     audios[type][name].play();
-    audios[type][name].addEventListener("ended", callback)
-}
-function PauseAudio(name, time = 1, callback = function() {}) {
+    function OnEnded() {
+        resolve();
+        audios[type][name].removeEventListener("ended", OnEnded);
+    }
+    audios[type][name].addEventListener("ended", OnEnded);
+})
+const StopAudio = (name, time = 1) => new Promise((resolve) => {
     if (!audios.musics[name]) {
-        console.warn(`Invalid name specified: "${type}"\nIgnoring PlayAudio request.`);
+        console.warn(`Invalid name specified: "${type}"\nIgnoring StopAudio request.`);
         return 0;
     }
-    time *= 100;
-    async function Next(i) {
-        i--
-        if (i < 0) {
+    if (time <= 0) {
+        console.warn(`Invalid time specified: "${time}"\nIgnoring StopAudio request.`)
+        return 0;
+    }
+    let start;
+    let baseVolume = audios.musics[name].volume;
+    function Next(dT) {
+        var delta = (dT - start) / time * baseVolume / 1000;
+        start = dT;
+        if (audios.musics[name].volume - delta <= 0) {
             audios.musics[name].pause();
             audios.musics[name].volume = settings.backgroundMusic;
-            callback();
-            return new funcReturn();
+            resolve();
+        } else {
+            audios.musics[name].volume -= delta;
+            window.requestAnimationFrame((ms) => Next(ms));
         }
-        audios.musics[name].volume = i / 10 / time;
-        await wait(0.01);
-        Next(i);
     }
-    Next(time)
-}
+    window.requestAnimationFrame((ms) => {start = ms; Next(ms)});
+})
 const Enums = {
     InputTypes: {
         Up: "Up",
@@ -89,70 +97,140 @@ const Enums = {
         Back: "Back",
     }
 }
-async function Fade(_in, time = 1, callback = function() {}, timeBeforeCallback = 0) {
-    timeBeforeCallback *= 1000;
-    time *= 100;
+const Appear = (elementId = "", time = 1) => new Promise((resolve) => {
+    let element = document.getElementById(elementId)
+    if (element === null) {
+        console.warn(`Invalid element ID specified: "${elementId}"\nIgnoring Appear request.`)
+    }
+    element.style.opacity = "0";
+    if (time < 0) {
+        console.warn(`Invalid time specified: "${time}"\nIgnoring Appear request.`)
+        return 0;
+    } else if (time === 0) {
+        element.style.opacity = "1";
+        resolve();
+        return 0;
+    }
+    let start;
+    function Next(dT) {
+        var delta = (dT - start) / time / 1000;
+        start = dT;
+        if (parseFloat(element.style.opacity) + delta >= 1) {
+            element.style.opacity = "1";
+            resolve();
+        } else {
+            element.style.opacity = parseFloat(element.style.opacity) + delta
+            window.requestAnimationFrame(Next);
+        }
+    }
+    window.requestAnimationFrame((ms) => {start = ms; Next(ms)});
+})
+const Disappear = (elementId = "", time = 1) => new Promise((resolve) => {
+    let element = document.getElementById(elementId)
+    if (element === null) {
+        console.warn(`Invalid element ID specified: "${elementId}"\nIgnoring Appear request.`)
+    }
+    if (time < 0) {
+        console.warn(`Invalid time specified: "${time}"\nIgnoring Appear request.`)
+        return 0;
+    } else if (time === 0) {
+        element.opacity = "0";
+        element.style.backgroundImage = null;
+        resolve();
+        return 0;
+    }
+    let start;
+    let baseOpacity = parseFloat(element.style.opacity);
+    function Next(dT) {
+        var delta = (dT - start) / time * baseOpacity / 1000;
+        start = dT;
+        if (parseFloat(element.style.opacity) - delta <= 0) {
+            element.style.opacity = "0";
+            element.style.backgroundImage = null;
+            resolve();
+        } else {
+            element.style.opacity = parseFloat(element.style.opacity) - delta;
+            window.requestAnimationFrame(Next);
+        }
+    }
+    window.requestAnimationFrame((ms) => {start = ms; Next(ms)});
+})
+const FadeIn = (time = 1) => new Promise((resolve) => {
     let fade = document.getElementById("fade");
-    if (_in) {
-        for (var i = 0; i > time; i++) {
-            fade.style.opacity = i / time;
-            await wait(0.01);
+    let start;
+    function Next(dT) {
+        var delta = (dT - start) / time / 1000;
+        start = dT;
+        if (parseFloat(fade.style.opacity) + delta >= 1) {
+            fade.style.opacity = "1";
+            resolve();
+        } else {
+            fade.style.opacity = parseFloat(fade.style.opacity) + delta;
+            window.requestAnimationFrame(Next);
         }
-        fade.style.opacity = 1;
-    } else {
-        for (var i = 100; i <= 0; i--) {
-            console.log("e");
-            fade.style.opacity = i / time;
-            await wait(0.01);
+    }
+    window.requestAnimationFrame((ms) => {start = ms; Next(ms)});
+})
+const FadeOut = (time = 1) => new Promise((resolve) => {
+    let fade = document.getElementById("fade");
+    let start;
+    let baseOpacity = parseFloat(fade.style.opacity);
+    function Next(dT) {
+        var delta = (dT - start) / time * baseOpacity / 1000;
+        start = dT;
+        if (parseFloat(fade.style.opacity) - delta <= 0) {
+            fade.style.opacity = "0";
+            resolve();
+        } else {
+            fade.style.opacity = parseFloat(fade.style.opacity) - delta;
+            window.requestAnimationFrame(Next);
         }
-        fade.style.opacity = 0;
     }
-    setTimeout(callback, timeBeforeCallback);
-    return new funcReturn(timeBeforeCallback);
-}
-async function ShowGame(visible) {
-    if (visible) {
-        document.getElementById("game").opacity = 0;
-        document.getElementById("game").classList.add("in");
-        document.getElementById("game").classList.remove("out");
-    } else {
-        document.getElementById("game").opacity = 1;
-        document.getElementById("game").classList.add("out");
-        document.getElementById("game").classList.remove("in");
-    }
-    await wait(0.6)
-}
-async function ShowChat(_in, textPart, callback = function() {}) {
+    window.requestAnimationFrame((ms) => {start = ms; Next(ms)});
+})
+
+const ShowChat = (textPart) => new Promise(async (resolve) => {
     let chat = document.getElementById("chat");
     let character = chat.querySelector("#character")
     let text = chat.querySelector("#content")
-    if (_in) {
-        if (!chat.classList.contains("in")) {
-            chat.classList.remove("off");
-            chat.classList.add("in");
-        }
-        character.style.color = characters[textPart.author].color;
-        character.innerText = characters[textPart.author].name;
-        let txt
-        if (characters[textPart.author]["has\""]) {
-            txt = `\"${textPart.text}\"`;
-        } else {
-            txt = `${textPart.text}`;
-        }
-        let i = txt.length;
-        for (i = txt.length; i <= 0; i--) {
-            text.innerText = txt.slice(0, -i);
-            await wait(0.024);
-        }
-        text.innerText = txt;
-        callback();
-        return new funcReturn();
-    } else {
-        chat.classList.remove("in");
-        chat.classList.add("off");
-        return new funcReturn(0.3)
+    if (!chat.classList.contains("in")) {
+        chat.classList.remove("off");
+        chat.classList.add("in");
     }
-}
+    if (characters[textPart.author].name === "") {
+        character.style.opacity = 0;
+        character.innerText = "_";
+    } else {
+        character.style.opacity = 1;
+        character.innerText = characters[textPart.author].name;
+    }
+    text.style.color = characters[textPart.author].color;
+    let txt
+    if (characters[textPart.author]["has\""]) {
+        txt = `\"${textPart.text}\"`;
+    } else {
+        txt = `${textPart.text}`;
+    }
+    let i = txt.length;
+    function Next() {
+        if (i <= 1) {
+            text.innerText = txt;
+            resolve();
+        } else {
+             i--
+            text.innerText = txt.slice(0, -i);
+            setTimeout(Next, 24);
+        }
+    }
+    Next();
+})
+const HideChat = () => new Promise(async (resolve) => {
+    chat.querySelector("#character").innerText = "";
+    chat.querySelector("#content").innerText = "";
+    chat.classList.remove("in");
+    chat.classList.add("off");
+    resolve();
+})
 function Arrow(on) {
     if (on) {
         document.getElementById("arrow").style.visibility = "visible";
@@ -171,111 +249,86 @@ let allButtons = {
             document.getElementById("Credits"),
             document.getElementById("Quit Game")
         ],
-        switch: function() {
-            var functions = [
-                async function() {
-                    SetOnInput(Enums.InputTypes.Up);
-                    SetOnInput(Enums.InputTypes.Down);
-                    SetOnInput(Enums.InputTypes.Left);
-                    SetOnInput(Enums.InputTypes.Right);
-                    SetOnInput(Enums.InputTypes.Back);
-                    SetOnInput(Enums.InputTypes.Interact);
-                    document.getElementById("introButtons").classList.remove("in");
-                    document.getElementById("introButtons").classList.add("out");
-                    PauseAudio("Twisted Clowns", 1.5);
-                    await Fade(true, 1).wait()
-                    document.getElementById("game").style.visibility = "visible";
-                    await Fade(false, 1).wait()
-                    Arrow(true);
-                    SetOnInput(Enums.InputTypes.Interact, functions[1]);
-                },
-                async function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                    Arrow(false);
-                    await Fade(true, 1, function() {}, 0.5).wait()
-                    document.getElementById("game").style.backgroundImage = 'url("images/TheCoffin_Title.png")';
-                    PlayAudio("Bells");
-                    await Fade(false, 1).wait()
-                    await Fade(true, 1, function() {}, 0.5).wait()
-                    document.getElementById("game").style.backgroundImage = 'url("images/WithoutInteraction.png")';
-                    PlayAudio("Jealous Doll", "musics");
-                    await Fade(false, 1).wait()
-                    await ShowChat(true, text.Main0).wait()
-                    Arrow(true);
-                    SetOnInput(Enums.InputTypes.Interact, functions[2]);
-                },
-                async function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                    Arrow(false);
-                    ShowGame(false);
-                    document.getElementById("game1").style.backgroundImage = 'url("images/WithInteraction.png")';
-                    ShowChat(true, text.Main1, function() {
-                        Arrow(true);
-                        SetOnInput(Enums.InputTypes.Interact, functions[3]);
-                    });
-                },
-                async function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                    Arrow(false);
-                    ShowChat(true, text.Main2, function() {
-                        Arrow(true);
-                        SetOnInput(Enums.InputTypes.Interact, functions[4]);
-                    });
-                },
-                async function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                    Arrow(false);
-                    ShowChat(true, text.Main3, function() {
-                        Arrow(true);
-                        SetOnInput(Enums.InputTypes.Interact, functions[5]);
-                    });
-                },
-                async function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                    Arrow(false);
-                    ShowChat(true, text.Main4, function() {
-                        Arrow(true);
-                        SetOnInput(Enums.InputTypes.Interact, functions[6]);
-                    });
-                },
-                async function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                    Arrow(false);
-                    document.getElementById("game").style.backgroundImage = "url()";
-                    document.getElementById("game").style.backgroundColor = 'rgb(0, 0, 0)';
-                    ShowGame(true);
-                    ShowChat(true, text.Main5, function() {
-                        Arrow(true);
-                        SetOnInput(Enums.InputTypes.Interact, functions[7]);
-                    });
-                },
-                async function() {
-                    PauseAudio("Jealous Doll", 1);
-                    SetOnInput(Enums.InputTypes.Interact);
-                    PlayAudio("Reminder");
-                    Arrow(false);
-                    ShowChat(false);
-                    document.getElementById("game1").style.backgroundImage = 'url("images/EyesClosed.png")';
-                    ShowGame(false);
-                    await wait(1.5);
-                    document.getElementById("game").style.backgroundImage = 'url("images/EyesOpened.png")';
-                    ShowGame(true);
-                    Fade(true, 1, function() {
-                        Fade(false, 1, function() {
-                            PlayAudio("Dreaming Injection", "musics")
-                            ShowChat(true, text.Main6, function() {
-                                SetOnInput(Enums.InputTypes.Interact, functions[8]);
-                            })
-                        })
-                    }, 1)
-                },
-                function() {
-                    SetOnInput(Enums.InputTypes.Interact);
-                }
-            ]
+        story: async function() {
+            SetOnInput(Enums.InputTypes.Up);
+            SetOnInput(Enums.InputTypes.Down);
+            SetOnInput(Enums.InputTypes.Left);
+            SetOnInput(Enums.InputTypes.Right);
+            SetOnInput(Enums.InputTypes.Back);
+            SetOnInput(Enums.InputTypes.Interact);
+            document.getElementById("introButtons").classList.remove("in");
+            document.getElementById("introButtons").classList.add("out");
+            StopAudio("Twisted Clowns", 2);
+            await FadeIn(1);
+            document.getElementById("intro").style.visibility = "hidden";
+            document.getElementById("asset0").style.backgroundImage = `url("img/pictures/keys.png")`;
+            document.getElementById("asset1").style.backgroundImage = `url("img/pictures/ch1.png")`;
+            document.getElementById("asset2").style.backgroundImage = 'url("images/WithoutInteraction.png")';
+            document.getElementById("asset3").style.backgroundImage = 'url("images/WithInteraction.png")';
+            document.getElementById("asset4").style.backgroundImage = 'url("images/EyesClosed.png")';
+            document.getElementById("asset5").style.backgroundImage = 'url("images/EyesOpened.png")';
+            document.getElementById("game").style.visibility = "visible";
+            Appear("asset0", 0);
+            await FadeOut(1);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            await Disappear("asset0", 1);
+            PlayAudio("Bells");
+            await Appear("asset1", 1);
+            await wait(0.5);
+            await Disappear("asset1", 1);
+            PlayAudio("Jealous Doll", "musics");
+            Appear("asset2", 1);
+            await wait(0.5);
+            await ShowChat(text.Main0);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            Appear("asset3", 0.5);
+            await ShowChat(text.Main1);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            await ShowChat(text.Main2);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            await ShowChat(text.Main3);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            await ShowChat(text.Main4);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            Disappear("asset2", 0.5);
+            HideChat();
+            await Disappear("asset3", 0.5);
+            await wait(0.2);
+            await ShowChat(text.Main5);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            StopAudio("Jealous Doll", 1);
+            HideChat();
+            PlayAudio("Reminder");
+            await wait(1);
+            await Appear("asset4", 1);
+            await Appear("asset5", 1);
+            await FadeIn(1);
+            Disappear("asset4", 0);
+            Disappear("asset5", 0);
+            document.getElementById("asset0").style.backgroundImage = 'url("images/RoomMain.png")';
+            document.getElementById("rightChar").src = "img/faces/s_weak[BUST].png";
+            Appear("asset0", 0)
+            FadeOut(1);
+            await wait(1);
+            PlayAudio("Dreaming Injection", "musics");
+            await ShowChat(text.Main6);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            Appear("rightChar", 0.5);
+            await ShowChat(text.Main7);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            Disappear("rightChar", 0.5);
+            await ShowChat(text.Main8);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            await ShowChat(text.Main9);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            await ShowChat(text.Main10);
+            await waitUntilKeyPressed(Enums.InputTypes.Interact);
+            HideChat();
+        },
+        switch: async function() {
             switch (this.focusedButton) {
                 case 0:
-                    functions[0]();
+                    this.story();
                     break
                 case 1:
                     break
@@ -288,39 +341,32 @@ let allButtons = {
                     document.getElementById("fade").style.opacity = 0.3;
                     wait(0.5)
                     SetOnInput(Enums.InputTypes.Interact);
-                    SetOnInput(Enums.InputTypes.Back, function() {
-                        currentButtons = allButtons.intro;
-                        PlayAudio("Out");
-                        document.getElementById("optionsButtons").classList.remove("in");
-                        document.getElementById("optionsButtons").classList.add("out");
-                        document.getElementById("introButtons").classList.remove("out");
-                        document.getElementById("introButtons").classList.add("in");
-                        document.getElementById("fade").style.opacity = 0;
-                        SetOnInput(Enums.InputTypes.Back);
-                        SetOnInput(Enums.InputTypes.Interact, FocusedButtonClick);
-                    })
+                    await waitUntilKeyPressed(Enums.InputTypes.Back);
+                    currentButtons = allButtons.intro;
+                    PlayAudio("Out");
+                    document.getElementById("optionsButtons").classList.remove("in");
+                    document.getElementById("optionsButtons").classList.add("out");
+                    document.getElementById("introButtons").classList.remove("out");
+                    document.getElementById("introButtons").classList.add("in");
+                    document.getElementById("fade").style.opacity = 0;
+                    SetOnInput(Enums.InputTypes.Back);
+                    SetOnInput(Enums.InputTypes.Interact, FocusedButtonClick);
                     break
                 case 3:
                     SetOnInput(Enums.InputTypes.Interact);
-                    PauseAudio("Twisted Clowns", 1);
-                    Fade(true, 1, function() {
-                        document.getElementById("credits").style.visibility = "visible";
-                        Fade(false, 1, function() {
-                            function callback() {
-                                SetOnInput(Enums.InputTypes.Back);
-                                SetOnInput(Enums.InputTypes.Interact);
-                                Fade(true, 1, function() {
-                                    document.getElementById("credits").style.visibility = "hidden";
-                                    Fade(false, 1, function() {
-                                        PlayAudio("Twisted Clowns", "musics");
-                                        SetOnInput(Enums.InputTypes.Interact, FocusedButtonClick);
-                                    });
-                                });
-                            }
-                            SetOnInput(Enums.InputTypes.Back, callback);
-                            SetOnInput(Enums.InputTypes.Interact, callback);
-                        });
-                    });
+                    StopAudio("Twisted Clowns", 1);
+                    await FadeIn(1);
+                    document.getElementById("credits").style.visibility = "visible";
+                    await FadeOut(1);
+                    async function callback() {
+                        SetOnInput([Enums.InputTypes.Interact, Enums.InputTypes.Back]);
+                        await FadeIn(1)
+                        document.getElementById("credits").style.visibility = "hidden";
+                        await FadeOut(1)
+                        PlayAudio("Twisted Clowns", "musics");
+                        SetOnInput(Enums.InputTypes.Interact, FocusedButtonClick);
+                    }
+                    SetOnInput([Enums.InputTypes.Interact, Enums.InputTypes.Back], callback);
                     break
                 case 4:
                     /*window.location.replace("https://jygttgyy.github.io");*/
@@ -431,17 +477,34 @@ let OnClick = {
     Back: function() {}
 }
 function SetOnInput(type, callback = function() {}) {
-    if (!OnClick[type]) {
-        console.warn(`Invalid type specified: "${type}"\nIgnoring SetOnInput request.`);
-        return 0;
-    }
-    OnClick[type] = function() {
-        if (!Cooldowns[type]) {
-            Cooldowns[type] = true;
-            callback();
-            setTimeout(function() {Cooldowns[type] = false;}, 120);
+    if (typeof(type) === "object") {
+        for (let i in type) {
+            let t = type[i];
+            if (!OnClick[t]) {
+                console.warn(`Invalid type specified: "${t}"\nIgnoring SetOnInput request.`);
+                return 0;
+            }
+            OnClick[t] = function() {
+                if (!Cooldowns[t]) {
+                    Cooldowns[t] = true;
+                    callback();
+                    setTimeout(function() {Cooldowns[t] = false;}, 120);
+                }
+            };
         }
-    };
+    } else {
+        if (!OnClick[type]) {
+            console.warn(`Invalid type specified: "${type}"\nIgnoring SetOnInput request.`);
+            return 0;
+        }
+        OnClick[type] = function() {
+            if (!Cooldowns[type]) {
+                Cooldowns[type] = true;
+                callback();
+                setTimeout(function() {Cooldowns[type] = false;}, 120);
+            }
+        };
+    }
 }
 function FocusedButtonClick(arg) {
     PlayAudio("In");
@@ -521,13 +584,13 @@ addEventListener("keyup", async (key) => {
         inputsHistory.splice(index, 1);
     }
 });
-function ActivateAudio() {
+async function ActivateAudio() {
     if (navigator.userActivation.hasBeenActive) {
         document.getElementById("introButtons").classList.add("in");
-        Fade(false, 1);
         PlayAudio("Twisted Clowns", "musics");
         SetOnInput(Enums.InputTypes.Up, function() {SetFocusedButton(1);});
         SetOnInput(Enums.InputTypes.Down, function() {SetFocusedButton(-1);});
+        await FadeOut(1);
         SetOnInput(Enums.InputTypes.Right, FocusedButtonClick);
         SetOnInput(Enums.InputTypes.Left, function() {FocusedButtonClick(-0.01)});
         SetOnInput(Enums.InputTypes.Interact, FocusedButtonClick);
@@ -542,6 +605,7 @@ function Resize() {
 }
 window.addEventListener("resize", Resize);
 Resize();
+//document.addEventListener('contextmenu', event => event.preventDefault());
 const characters = {
     "Ashley": {
         "name": "Ashley",
@@ -600,226 +664,261 @@ const text = {
         "text": "We'll get in trouble..."
     },
     "Main6": {
-        "author": "Ashley",
-        "text": "Ugh.........."
+        "author": "",
+        "text": "Goooo-oood morning, Ashley!!",
 	},
     "Main7": {
-        "author": "",
-        "text": "As much as you love feeling sorry for yourself,\nit is time for a little interlude..."
+        "author": "Ashley",
+        "text": "Ugh..........",
+        "image": ""
 	},
     "Main8": {
         "author": "",
-        "text": "It is titled: \"Find Nutrients To Not Die.\""
+        "text": "As much as you love feeling sorry for yourself,\nit is time for a little interlude..."
 	},
     "Main9": {
         "author": "",
-        "text": "Ready, set, go!"
+        "text": "It is titled: \"Find Nutrients To Not Die.\""
 	},
     "Main10": {
         "author": "",
-        "text": "This is where you and your brother pile your trash."
-    },
+        "text": "Ready, set, go!"
+	},
     "Main11": {
         "author": "",
-        "text": "It's been scavenged several times, and is truly and utterly exhausted as a food source."
+        "text": "This is where you and your brother pile your trash."
     },
     "Main12": {
         "author": "",
-        "text": "But wait! What is that..?"
+        "text": "It's been scavenged several times, and is truly and utterly exhausted as a food source."
     },
     "Main13": {
+        "author": "",
+        "text": "But wait! What is that..?"
+    },
+    "Main14": {
         "notif": true,
         "author": "",
         "text": "Got a Can of Tomatoes!"
     },
-    "Main14": {
+    "Main15": {
         "author": "",
         "text": "Amazing! You should show that to your brother."
     },
-    "Main15": {
+    "Main16": {
         "author": "",
         "text": "You show him the Tomato Can."
     },
-    "Main16": {
-        "author": "Ashley",
-        "text": "Tadaah!"
-    },
     "Main17": {
-        "author": "Andrew",
-        "text": ". . . . . . . . . . . . ."
+        "author": "Ashley",
+        "text": "Tadaah!",
+        "image": ""
     },
     "Main18": {
+        "author": "Andrew",
+        "text": ". . . . . . . . . . . . .",
+        "image": ""
+    },
+    "Main19": {
         "author": "",
         "text": "Not the reaction you were hoping for..."
     },
-    "Main19": {
-        "author": "Ashley",
-        "text": "A-hem..."
-    },
     "Main20": {
         "author": "Ashley",
-        "text": "TADAAAAAAAHHH!!"
+        "text": "A-hem...",
+        "image": ""
     },
     "Main21": {
-        "author": "Andrew",
-        "text": "We're not eating that."
+        "author": "Ashley",
+        "text": "TADAAAAAAAHHH!!",
+        "image": ""
     },
     "Main22": {
-        "author": "Ashley",
-        "text": "Huh...?"
+        "author": "Andrew",
+        "text": "We're not eating that.",
+        "image": ""
     },
     "Main23": {
-        "author": "Andrew",
-        "text": "No. That's the very last thing we have, Ashley..."
+        "author": "Ashley",
+        "text": "Huh...?",
+        "image": ""
     },
     "Main24": {
         "author": "Andrew",
-        "text": "Quit your complaining!"
+        "text": "No. That's the very last thing we have, Ashley...",
+        "image": ""
     },
     "Main25": {
         "author": "Andrew",
-        "text": "You're energetic enough to go rummaging through\nour trash, so clearly you're not dying yet!"
+        "text": "Quit your complaining!",
+        "image": ""
     },
     "Main26": {
-        "author": "Ashley",
-        "text": "Huh? How did you know it was in--"
+        "author": "Andrew",
+        "text": "You're energetic enough to go rummaging through\nour trash, so clearly you're not dying yet!",
+        "image": ""
     },
     "Main27": {
-        "author": "Andrew",
-        "text": "Because I hid it there! Away from you."
+        "author": "Ashley",
+        "text": "Huh? How did you know it was in--",
+        "image": ""
     },
     "Main28": {
-        "author": "Ashley",
-        "text": "GASP!"
+        "author": "Andrew",
+        "text": "Because I hid it there! Away from you.",
+        "image": ""
     },
     "Main29": {
         "author": "Ashley",
-        "text": "I live in a den of snakes!!"
+        "text": "GASP!",
+        "image": ""
     },
     "Main30": {
-        "author": "Andrew",
-        "text": "Ahh, don't rile me up... You're making me hungry."
+        "author": "Ashley",
+        "text": "I live in a den of snakes!!",
+        "image": ""
     },
     "Main31": {
-        "author": "Ashley",
-        "text": "Do you know what would help with that, Andrew my dear?"
+        "author": "Andrew",
+        "text": "Ahh, don't rile me up... You're making me hungry.",
+        "image": ""
     },
     "Main32": {
-        "author": "Andrew",
-        "text": "No. Put the tomatoes away somewhere."
+        "author": "Ashley",
+        "text": "Do you know what would help with that, Andrew my dear?",
+        "image": ""
     },
     "Main33": {
-        "author": "Ashley",
-        "text": "Put them in my mouth, I will!"
+        "author": "Andrew",
+        "text": "No. Put the tomatoes away somewhere.",
+        "image": ""
     },
     "Main34": {
-        "author": "Andrew",
-        "text": "........I can see that your heart is set on this."
+        "author": "Ashley",
+        "text": "Put them in my mouth, I will!",
+        "image": ""
     },
     "Main35": {
         "author": "Andrew",
-        "text": "Fine. Let's eat them then.\nScrew our future selves."
+        "text": "........I can see that your heart is set on this.",
+        "image": ""
     },
     "Main36": {
+        "author": "Andrew",
+        "text": "Fine. Let's eat them then.\nScrew our future selves.",
+        "image": ""
+    },
+    "Main37": {
         "author": "",
         "text": "Time for you to go cook some tomatoes."
     },
-    "Main37": {
-        "author": "Ashley",
-        "text": "Sighhhh....."
-    },
     "Main38": {
-        "author": "",
-        "text": "You boil the canned tomatoes to make\ndelicious boiled canned tomatoes!"
+        "author": "Ashley",
+        "text": "Sighhhh.....",
+        "image": ""
     },
     "Main39": {
         "author": "",
-        "text": "There's even a little bit of pepper left to season\nwith! This is some gourmet stuff right there."
+        "text": "You boil the canned tomatoes to make\ndelicious boiled canned tomatoes!"
     },
     "Main40": {
         "author": "",
-        "text": "No salt though."
+        "text": "There's even a little bit of pepper left to season\nwith! This is some gourmet stuff right there."
     },
     "Main41": {
         "author": "",
-        "text": "You've used all of it to spike your water, in order to avoid\noverhydrating yourself while drinking to fill your stomach."
+        "text": "No salt though."
     },
     "Main42": {
-        "author": "Ashley",
-        "text": "....Well? How is it?"
+        "author": "",
+        "text": "You've used all of it to spike your water, in order to avoid\noverhydrating yourself while drinking to fill your stomach."
     },
     "Main43": {
-        "author": "Andrew",
-        "text": "At this point you could feed me a can of worms and I'd say it's the best thing I ever ate..."
+        "author": "Ashley",
+        "text": "....Well? How is it?",
+        "image": ""
     },
     "Main44": {
-        "author": "Ashley",
-        "text": "Kiss-ass."
+        "author": "Andrew",
+        "text": "At this point you could feed me a can of worms and I'd say it's the best thing I ever ate...",
+        "image": ""
     },
     "Main45": {
-        "author": "Andrew",
-        "text": "No, I'm saying that's how hungry I am!!"
+        "author": "Ashley",
+        "text": "Kiss-ass.",
+        "image": ""
     },
     "Main46": {
+        "author": "Andrew",
+        "text": "No, I'm saying that's how hungry I am!!",
+        "image": ""
+    },
+    "Main47": {
         "author": "",
         "text": "It is at that moment that an ominous\naudio assaults your ear drums."
     },
-    "Main47": {
-        "author": "Andrew",
-        "text": "............Are you kidding me? The\nneighbor is at it again??"
-    },
     "Main48": {
-        "author": "Ashley",
-        "text": "Wanna go take a peek?"
+        "author": "Andrew",
+        "text": "............Are you kidding me? The\nneighbor is at it again??",
+        "image": ""
     },
     "Main49": {
-        "author": "Andrew",
-        "text": "Nope."
+        "author": "Ashley",
+        "text": "Wanna go take a peek?",
+        "image": ""
     },
     "Main50": {
         "author": "Andrew",
-        "text": "But I'll come along if you do..."
+        "text": "Nope.",
+        "image": ""
     },
     "Main51": {
         "author": "Andrew",
-        "text": "Here. Catch."
+        "text": "But I'll come along if you do...",
+        "image": ""
     },
     "Main52": {
+        "author": "Andrew",
+        "text": "Here. Catch.",
+        "image": ""
+    },
+    "Main53": {
         "notif": true,
         "author": "",
         "text": "Got Balcony Key!"
     },
-    "Main53": {
+    "Main54": {
         "author": "Andrew",
         "text": "Hmm... Can't really squat from here."
-    },
-    "Main54": {
-        "notif": true,
-        "author": "",
-        "text": "Got a Wooden Plank!"
     },
     "Main55": {
         "notif": true,
         "author": "",
-        "text": "Set down the Wooden Plank!"
+        "text": "Got a Wooden Plank!"
     },
     "Main56": {
-        "author": "Ashley",
-        "text": ". . . . . . . . ."
+        "notif": true,
+        "author": "",
+        "text": "Set down the Wooden Plank!"
     },
     "Main57": {
-        "author": "Cultist",
-        "text": "OOOOH, DEMONS FROM HELL!!"
+        "author": "Ashley",
+        "text": ". . . . . . . . .",
+        "image": ""
     },
     "Main58": {
         "author": "Cultist",
-        "text": "HEAR MY PLEA!"
+        "text": "OOOOH, DEMONS FROM HELL!!"
     },
     "Main59": {
         "author": "Cultist",
-        "text": "OOH, THE UNHOLY ONES!\nI COME SEEKING YOUR ADVICE!!"
+        "text": "HEAR MY PLEA!"
     },
     "Main60": {
+        "author": "Cultist",
+        "text": "OOH, THE UNHOLY ONES!\nI COME SEEKING YOUR ADVICE!!"
+    },
+    "Main61": {
         "author": "Cultist",
         "text": "........................................"
     }

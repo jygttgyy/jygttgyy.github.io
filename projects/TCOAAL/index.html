@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html tabindex="-1" lang="en">
     <head>
-        <title id="e">TCOAAL</title>
+        <title id="title">TCOAAL</title>
         <link rel="stylesheet" href="index.css">
         <link rel="icon" type="image/x-icon" href="images/icon.ico">
     </head>
     <body>
         <div id="intro">
             <div id="introButtons" class="buttons">
-                <div class="focused" id="New Game"><img src="images/icons/NEW.png"><button>New Game</button></div>
-                <div id="Continue"><img src="images/icons/PLAY.png"><button style="color: rgb(120, 120, 120);">Continue</button></div>
-                <div id="Options"><img src="images/icons/OPTIONS.png"><button>Options</button></div>
-                <div id="Credits"><img src="images/icons/CREDITS.png"><button>Credits</button></div>
-                <div id="Quit Game"><img src="images/icons/QUIT.png"><button>Quit Game</button></div>
+                <div class="focused" id="New Game"><img src="img/system/new_game.png"><button>New Game</button></div>
+                <div id="Continue"><img src="img/system/continue.png"><button style="color: rgb(120, 120, 120);">Continue</button></div>
+                <div id="Options"><img src="img/system/options.png"><button>Options</button></div>
+                <div id="Credits"><img src="img/system/credits.png"><button>Credits</button></div>
+                <div id="Quit Game"><img src="img/system/quit.png"><button>Quit Game</button></div>
             </div>
-        </div>
-        <div id="game"></div>
-        <div id="game1"></div>
-        <div id="credits" style="visibility: hidden;">
-            <p>jygttgyy - Credits to myself, TCOAAL Web version maker x]</p>
-            <h1 style="color: rgb(230, 130, 190)">Credits to</h1>
-            <p>Nemley - The original game's creator and art maker</p>
-            <p>Pix9 - The original game's coding studio</p>
-            <p>More credits found in their game...</p>
         </div>
         <div id="options" style="z-index: 100;">
             <div id="optionsButtons" class="buttons">
@@ -36,9 +27,30 @@
                 <div id="SFX"><button>Volume SFX</button><p>50%</p></div>
             </div>
         </div>
-        <div id="fade"></div>
-        <div id="arrow" style="visibility: hidden;">
-            <img style="position: absolute; margin-left: -32px; bottom: 0;" src="images/Arrow.gif">
+        <div id="credits">
+            <p> </p>
+            <p>jygttgyy - TCOAAL Web version maker x]</p>
+            <p>[ANONYMOUS RUSSIAN] - Game's textures & images</p>
+            <h1 style="color: rgb(230, 130, 190)">Original credits</h1>
+            <p>Nemley - The original game's creator and art maker</p>
+            <p>Pix9 - The original game's coding studio</p>
+            <p>More credits found in their game...</p>
+        </div>
+        <div id="game">
+            <div id="asset0" style="z-index: 11;"></div>
+            <div id="asset1" style="z-index: 11;"></div>
+            <div id="asset2"></div>
+            <div id="asset3"></div>
+            <div id="asset4"></div>
+            <div id="asset5"></div>
+            <div id="asset6"></div>
+            <div id="asset7"></div>
+            <div id="asset8"></div>
+            <div id="asset9"></div>
+        </div>
+        <div id="characters">
+            <img id="leftChar" style="left: 5%;" src="img/faces/b_ahh[BUST].png">
+            <img id="rightChar" style="right: 5%;">
         </div>
         <div id="notif" style="background-image: url(images/ChatBubble.png); visibility: hidden;">
             <p id="character" style="margin-top: 43.5%; margin-bottom: 0.5%; font-size: 3.5vmin;"></p>
@@ -48,6 +60,10 @@
             <p id="character" style="margin-top: 43.5%; margin-bottom: 0.5%; font-size: 3.5vmin;"></p>
             <p id="content" style="margin-top: 0;"></p>
         </div>
+        <div id="arrow" style="visibility: hidden;">
+            <img style="position: absolute; margin-left: -32px; bottom: 0;" src="images/Arrow.gif">
+        </div>
+        <div id="fade" style="opacity: 1;"></div>
     </body>
     <script src="index.js"></script>
 </html>
