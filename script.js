@@ -1,5 +1,5 @@
 document.querySelector("body").style.height = document.body.scrollHeight + "px";
-var text = "jygttgyy ";
+var text = "jygttgyy's Official Webpage ";
 var last = 0;
 function UpdateTitle() {
     setTimeout(UpdateTitle, 500);
