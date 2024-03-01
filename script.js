@@ -1,6 +1,6 @@
 document.querySelector("body").style.height = document.body.scrollHeight + "px";
 const audio = new Audio("https://jygttgyy.github.io/MadeOfSteel.mp3")
-audio.volume = 0.5;
+audio.volume = 0.2;
 audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
