@@ -9,7 +9,7 @@ var cooldown = false;
 var messages = [];
 var last_msg = 0;
 function GetMessages() {
-    fetch("https://jygttgyy.up.railway.app/chat-action").then((response) => {
+    fetch("http://us-nyc03.pylex.me:8433/chat-action").then((response) => {
 	    if (!response.ok) {
 		    throw new Error(`HTTP error: ${response.status}`);
 	    }
@@ -65,7 +65,7 @@ function SendMessage() {
 			id = "" + Math.round(Math.random() * 9) + Math.round(Math.random() * 9) + Math.round(Math.random() * 9) + Math.round(Math.random() * 9);
 			setCookie("id", id, 365);
 		}
-        fetch("https://jygttgyy.up.railway.app/chat-action", {
+        fetch("http://us-nyc03.pylex.me:8433/chat-action", {
 	        method: "POST",
 	        body: JSON.stringify({
 				id: id,
