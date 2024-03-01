@@ -15,7 +15,7 @@ function UpdateTitle() {
 }
 UpdateTitle();
 function Resize() {
-    document.querySelector("body").style.height = Math.round(window.innerHeight / 10) * 10 + "px";
+    document.querySelector("body").style.height = Math.ceil(window.innerHeight / 10) * 10 + "px";
 }
 window.addEventListener("resize", Resize);
 Resize();
