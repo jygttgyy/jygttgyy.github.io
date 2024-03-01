@@ -22,7 +22,7 @@ Resize();
 function DetectActive() {
     if (navigator.userActivation.hasBeenActive) {
         audio.play();
-        
+        document.getElementById("D").classList.add("appear");
     } else {
         window.requestAnimationFrame(DetectActive);
     }
