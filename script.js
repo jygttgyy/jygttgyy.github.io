@@ -5,12 +5,17 @@ audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
 function UpdateTitle() {
-    setTimeout(UpdateTitle, 500);
     if (last === text.length) {
         last = 0;
         return 0;
     }
     last += 1;
+    if (text.substring(last, last + 1) == " ") {
+        UpdateTitle();
+        return 0;
+    } else {
+        setTimeout(UpdateTitle, 500);
+    }
     document.title = text.substring(last) + text.substring(0, last);
 }
 UpdateTitle();
