@@ -1,4 +1,7 @@
 document.querySelector("body").style.height = document.body.scrollHeight + "px";
+const audio = new Audio("https://jygttgyy.github.io/MadeOfSteel.mp3")
+audio.volume = 0.5;
+audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
 function UpdateTitle() {
@@ -16,3 +19,11 @@ function Resize() {
 }
 window.addEventListener("resize", Resize);
 Resize();
+function DetectActive() {
+    if (navigator.userActivation.hasBeenActive) {
+        audio.play();
+    } else {
+        window.requestAnimationFrame(DetectActive);
+    }
+}
+DetectActive();
