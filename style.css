@@ -18,6 +18,7 @@ div.appear {
     animation-duration: 2s;
 }
 div {
+    position: absolute;
     opacity: 1;
     width: inherit;
     height: inherit;
