@@ -1,3 +1,7 @@
+@keyframes d {
+    from {opacity: 1};
+    to {opacity: 0}
+}
 body {
     width: 100%;
     display: flex;
@@ -7,7 +11,13 @@ body {
 img {
     margin: auto;
 }
+div.appear {
+    animation-name: d;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+}
 div {
+    opacity: 1;
     width: 100%;
     height: 100%;
 }

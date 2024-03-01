@@ -22,6 +22,7 @@ Resize();
 function DetectActive() {
     if (navigator.userActivation.hasBeenActive) {
         audio.play();
+        
     } else {
         window.requestAnimationFrame(DetectActive);
     }
