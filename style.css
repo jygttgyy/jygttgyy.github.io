@@ -12,6 +12,7 @@ img {
     margin: auto;
 }
 div.appear {
+    position: absolute;
     animation-name: d;
     animation-fill-mode: forwards;
     animation-duration: 2s;
