@@ -1,13 +1,18 @@
-var title = document.getElementById("title");
-var text = "jygttgyy        ";
+document.querySelector("body").style.height = document.body.scrollHeight + "px";
+var text = "jygttgyy ";
 var last = 0;
 function UpdateTitle() {
+    setTimeout(UpdateTitle, 500);
     if (last === text.length) {
         last = 0;
-    } else {
-        last++
+        return 0;
     }
-    title.innerText = text.substring(0, last) + text.substring(last);
-    setTimeout(UpdateTitle, 500);
+    last += 1;
+    document.title = text.substring(last) + text.substring(0, last);
 }
 UpdateTitle();
+function Resize() {
+    document.querySelector("body").style.height = Math.round(window.innerHeight / 10) * 10 + "px";
+}
+window.addEventListener("resize", Resize);
+Resize();
