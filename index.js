@@ -1,9 +1,18 @@
-document.querySelector("body").style.height = document.body.scrollHeight + "px";
 var audio = new Audio("https://jygttgyy.github.io/MadeOfSteel.mp3")
 audio.volume = 0.1;
 audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
+function imageRefresh(img, timeout) {
+    setTimeout(function() {
+        var d = new Date();
+        var http = img.src;
+        if (http.indexOf("&d=") != -1) {
+            http = http.split("&d=")[0];
+        }
+        img.src = http + '&d=' + d.getTime();
+    }, timeout);
+}
 function UpdateTitle() {
     last += 1;
     if (text.substring(last, last + 1) == " ") {

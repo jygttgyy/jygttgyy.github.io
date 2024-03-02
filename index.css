@@ -4,7 +4,6 @@
 }
 body {
     margin: 0px;
-    width: 100%;
     display: flex;
     overflow: hidden;
     background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(50, 50, 50) 100%);
