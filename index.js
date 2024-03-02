@@ -24,8 +24,8 @@ function UpdateTitle() {
 }
 UpdateTitle();
 function Resize() {
-    document.querySelector("body").style.height = window.innerHeight + "px";
-    document.querySelector("body").style.width = window.innerWidth + "px";
+    document.body.style.height = window.innerHeight + "px";
+    document.body.style.width = window.innerWidth + "px";
 }
 window.addEventListener("resize", Resize);
 Resize();
