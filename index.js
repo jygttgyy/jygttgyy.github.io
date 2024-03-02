@@ -27,8 +27,6 @@ function Resize() {
     document.body.style.height = window.innerHeight + "px";
     document.body.style.width = window.innerWidth + "px";
 }
-window.addEventListener("resize", Resize);
-Resize();
 function DetectActive() {
     if (navigator.userActivation.hasBeenActive) {
         audio.play();
@@ -40,4 +38,5 @@ function DetectActive() {
         window.requestAnimationFrame(DetectActive);
     }
 }
-DetectActive();
+window.addEventListener("resize", Resize);
+window.addEventListener("load", function() {Resize(); DetectActive()});

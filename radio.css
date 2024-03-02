@@ -13,3 +13,10 @@ body {
     animation-fill-mode: forwards;
     animation-duration: 2s;
 }
+@keyframes d {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+#shadow.welcome {
+    animation-name: d;
+}
