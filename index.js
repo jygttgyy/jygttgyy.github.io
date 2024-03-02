@@ -10,12 +10,12 @@ function imageRefresh(img, timeout) {
 }
 function UpdateTitle() {
     last += 1;
-    if (text.substring(last, last + 1) == " ") {
+    /*if (text.substring(last, last + 1) == " ") {
         UpdateTitle();
         return 0;
-    } else {
+    } else {*/
         setTimeout(UpdateTitle, 250);
-    }
+    //}
     if (last >= text.length) {
         last = 0;
         return 0;
