@@ -4,7 +4,6 @@ function Resize() {
 }
 function DetectActive() {
     if (navigator.userActivation.hasBeenActive) {
-        audio.play();
         document.getElementById("shadow").addEventListener("animationend", function() {
             document.getElementById("shadow").remove();
         })
