@@ -20,7 +20,8 @@ function UpdateTitle() {
 }
 UpdateTitle();
 function Resize() {
-    document.querySelector("body").style.height = Math.ceil(window.innerHeight / 10) * 10 + "px";
+    document.querySelector("body").style.height = window.innerHeight + "px";
+    document.querySelector("body").style.width = window.innerWidth + "px";
 }
 window.addEventListener("resize", Resize);
 Resize();
