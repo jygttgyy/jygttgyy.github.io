@@ -21,7 +21,7 @@ div.welcome {
 div.goodbye {
     animation-name: e;
 }
-div {
+#shadow {
     position: absolute;
     opacity: 1;
     width: inherit;
