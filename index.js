@@ -14,7 +14,7 @@ function UpdateTitle() {
         UpdateTitle();
         return 0;
     } else {
-        setTimeout(UpdateTitle, 500);
+        setTimeout(UpdateTitle, 250);
     }
     if (last >= text.length) {
         last = 0;
