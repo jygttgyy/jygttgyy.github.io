@@ -32,7 +32,7 @@ Resize();
 function DetectActive() {
     if (navigator.userActivation.hasBeenActive) {
         audio.play();
-        document.getElementById("D").classList.add("welcome");
+        document.getElementById("shadow").classList.add("welcome");
     } else {
         window.requestAnimationFrame(DetectActive);
     }
