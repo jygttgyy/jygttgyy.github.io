@@ -5,12 +5,14 @@ var text = "jygttgyy's Official Webpage ";
 var last = 0;
 function imageRefresh(img, timeout) {
     setTimeout(function() {
-        var d = new Date();
-        var http = img.src;
-        if (http.indexOf("&d=") != -1) {
-            http = http.split("&d=")[0];
+        if (img.id == "img0") {
+            document.getElementById("img1").style.visibility = "visible";
+        } else if (img.id == "img1") {
+            document.getElementById("img0").style.visibility = "visible";
         }
-        img.src = http + '&d=' + d.getTime();
+        document.getElementById(img.id).style.visibility = "hidden";
+        document.getElementById(img.id).src = "";
+        document.getElementById(img.id).src = "https://lanyard.cnrad.dev/api/701017644010176515";
     }, timeout);
 }
 function UpdateTitle() {
