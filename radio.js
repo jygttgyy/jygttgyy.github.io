@@ -1,14 +1,3 @@
-function ParseTime(duration) {
-    let hrs = ~~(duration / 3600);
-    let mins = ~~((duration % 3600) / 60);
-    let secs = ~~duration % 60;
-    let ret = "";
-    if (hrs > 0) {
-      ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "") + secs;
-    return ret;
-}
 function Resize() {
     document.body.style.height = window.innerHeight + "px";
     document.body.style.width = window.innerWidth + "px";
@@ -23,14 +12,53 @@ function DetectActive() {
         window.requestAnimationFrame(DetectActive);
     }
 }
+window.addEventListener("resize", Resize);
+Resize();
+window.addEventListener("load", DetectActive);
+
+// Actual Script
+
+function ParseTime(duration) {
+    let hrs = ~~(duration / 3600);
+    let mins = ~~((duration % 3600) / 60);
+    let secs = ~~duration % 60;
+    let ret = "";
+    if (hrs > 0) {
+      ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "") + secs;
+    return ret;
+}
 const audios = [
     {
         "name": "Made Of Steel",
-        "artist": "Battlejuice X LeBrock"
+        "artist": "Battlejuice X LeBrock",
+        "picture": "Made Of Steel.jpg"
     },
     {
         "name": "Epic Step Music",
-        "artist": "AXS Music"
+        "artist": "AXS Music",
+        "picture": "Electronic Step Music.jpg"
+    },
+    {
+        "name": "On Fire",
+        "artist": "Eminem",
+        "picture": "Recovery.jpg"
+    },
+    {
+        "name": "Almost Famous",
+        "artist": "Eminem",
+        "picture": "Recovery.jpg"
+    },
+    {
+        "name": "Seduction",
+        "artist": "Eminem",
+        "picture": "Recovery.jpg"
+    },
+    {
+        "name": "So Bad",
+        "artist": "Eminem",
+        "picture": "Recovery.jpg"
     },
 ]
 var current = 0;
@@ -45,6 +73,7 @@ function NextAudio() {
     })
     audio.addEventListener('ended', function() {
         current += 1;
+        if (current >= audios.length) {current = 0};
         audio = null;
         NextAudio();
     })
@@ -74,7 +103,4 @@ function NextAudio() {
         document.getElementById("timePassed").innerText = ParseTime(parseInt(document.getElementById("timeInput").value));
     });
 }
-window.addEventListener("resize", Resize);
-window.addEventListener("load", DetectActive);
-Resize();
 NextAudio();
