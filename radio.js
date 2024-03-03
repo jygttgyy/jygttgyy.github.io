@@ -33,42 +33,48 @@ const audios = [
         "artist": "AXS Music"
     },
 ]
-var currentAudio = audios[0];
-var audio = new Audio("Musics/" + currentAudio.name + ".mp3");
-audio.addEventListener('loadedmetadata', function() {
-    document.getElementById("timeInput").max = audio.duration;
-})
-audio.addEventListener('ended', function() {
-    currentAudio = audios[1];
-    audio = new Audio("Musics/" + currentAudio.name + ".mp3");
+var current = 0;
+function NextAudio() {
+    var currentAudio = audios[current];
+    var audio = new Audio("Musics/" + currentAudio.name + ".mp3");
     document.getElementById("timeInput").value = 0;
     document.getElementById("timePassed").innerText = "0:00";
-})
-function PauseAudio() {
-    document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Play.png";
-    audio.pause();
+    document.getElementById("musicName").innerText = currentAudio.name;
+    audio.addEventListener('loadedmetadata', function() {
+        document.getElementById("timeInput").max = audio.duration;
+    })
+    audio.addEventListener('ended', function() {
+        current += 1;
+        audio = null;
+        NextAudio();
+    })
+    function PauseAudio() {
+        document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Play.png";
+        audio.pause();
+        document.getElementById("playPauseButton").onclick = PlayAudio;
+    }
+    function PlayAudio() {
+        document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Stop.png";
+        audio.volume = parseInt(document.getElementById("volumeInput").value) / 100;
+        audio.play();
+        document.getElementById("playPauseButton").onclick = PauseAudio;
+    }
     document.getElementById("playPauseButton").onclick = PlayAudio;
+    document.getElementById("volumeInput").addEventListener('input', function() {
+        let volume = document.getElementById("volumeInput").value;
+        audio.volume = volume / 100;
+        document.getElementById("volumePercent").innerText = volume + "%";
+    });
+    document.getElementById("timeInput").addEventListener('input', function() {
+        audio.currentTime = document.getElementById("timeInput").value;
+        document.getElementById("timePassed").innerText = ParseTime(parseInt(document.getElementById("timeInput").value));
+    });
+    audio.addEventListener('timeupdate', function() {
+        document.getElementById("timeInput").value = audio.currentTime;
+        document.getElementById("timePassed").innerText = ParseTime(parseInt(document.getElementById("timeInput").value));
+    });
 }
-function PlayAudio() {
-    document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Stop.png";
-    audio.volume = parseInt(document.getElementById("volumeInput").value) / 100;
-    audio.play();
-    document.getElementById("playPauseButton").onclick = PauseAudio;
-}
-document.getElementById("playPauseButton").onclick = PlayAudio;
-document.getElementById("volumeInput").addEventListener('input', function() {
-    let volume = document.getElementById("volumeInput").value;
-    audio.volume = volume / 100;
-    document.getElementById("volumePercent").innerText = volume + "%";
-});
-document.getElementById("timeInput").addEventListener('input', function() {
-    audio.currentTime = document.getElementById("timeInput").value;
-    document.getElementById("timePassed").innerText = ParseTime(parseInt(document.getElementById("timeInput").value));
-});
-audio.addEventListener('timeupdate', function() {
-    document.getElementById("timeInput").value = audio.currentTime;
-    document.getElementById("timePassed").innerText = ParseTime(parseInt(document.getElementById("timeInput").value));
-});
 window.addEventListener("resize", Resize);
 window.addEventListener("load", DetectActive);
-Resize()
+Resize();
+NextAudio();
