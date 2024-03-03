@@ -42,7 +42,7 @@ function PlayAudio() {
 document.getElementById("playPauseButton").onclick = PlayAudio;
 document.getElementById("volumeInput").addEventListener('input', function() {
     let volume = document.getElementById("volumeInput").value;
-    audio.volume = volume;
+    audio.volume = volume / 100;
     document.getElementById("volumePercent").innerText = volume + "%";
 });
 document.getElementById("timeInput").addEventListener('input', function() {
