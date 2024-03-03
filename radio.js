@@ -28,12 +28,12 @@ audio.addEventListener('loadedmetadata', function() {
     document.getElementById("timeInput").max = audio.duration;
 })
 function PauseAudio() {
-    document.getElementById("playPauseButton").querySelector("img").src = "Play.png";
+    document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Play.png";
     audio.pause();
     document.getElementById("playPauseButton").onclick = PlayAudio;
 }
 function PlayAudio() {
-    document.getElementById("playPauseButton").querySelector("img").src = "Stop.png";
+    document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Stop.png";
     audio.volume = parseInt(document.getElementById("volumeInput").value) / 100;
     //audio.currentTime = parseInt(document.getElementById("timeInput").value);
     audio.play();
