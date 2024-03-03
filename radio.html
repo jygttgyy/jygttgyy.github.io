@@ -12,6 +12,24 @@
     </head>
     <body>
         <div id="shadow"></div>
+        <div id="musicControlPanel">
+            <p id="musicName">BANGARANG</p>
+            <div id="controls">
+                <button id="shuffleButton"><img src="ShuffleOff.png"></button>
+                <button id="backwardsButton"><img style="rotate: 180deg; z-index: 0;" src="FastForward.png"></button>
+                <button id="playPauseButton"><img src="Play.png"></button>
+                <button id="forwardsButton"><img src="FastForward.png"></button>
+                <button id="loopButton"><img src="LoopOff.png"></button>
+            </div>
+            <div>
+                <input id="volumeInput" type="range" min="0" max="100" value="50">
+                <span id="volumePercent">50%</span>
+            </div>
+            <div>
+                <input id="timeInput" type="range" min="0" max="60" value="0">
+                <span id="timePassed">0:00</span>
+            </div>
+        </div>
     </body>
     <script src="radio.js"></script>
 </html>
