@@ -18,7 +18,6 @@ function UpdateTitle() {
     }
     if (last >= text.length) {
         last = 0;
-        return 0;
     }
     document.title = text.substring(last) + text.substring(0, last);
 }
