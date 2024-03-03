@@ -23,9 +23,26 @@ function DetectActive() {
         window.requestAnimationFrame(DetectActive);
     }
 }
-const audio = new Audio("MadeOfSteel.mp3");
+const audios = [
+    {
+        "name": "Made Of Steel",
+        "artist": "Battlejuice X LeBrock"
+    },
+    {
+        "name": "Epic Step Music",
+        "artist": "AXS Music"
+    },
+]
+var currentAudio = audios[0];
+var audio = new Audio("Musics/" + currentAudio.name + ".mp3");
 audio.addEventListener('loadedmetadata', function() {
     document.getElementById("timeInput").max = audio.duration;
+})
+audio.addEventListener('ended', function() {
+    currentAudio = audios[1];
+    audio = new Audio("Musics/" + currentAudio.name + ".mp3");
+    document.getElementById("timeInput").value = 0;
+    document.getElementById("timePassed").innerText = "0:00";
 })
 function PauseAudio() {
     document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Play.png";
@@ -35,7 +52,6 @@ function PauseAudio() {
 function PlayAudio() {
     document.getElementById("playPauseButton").querySelector("img").src = "ButtonImages/Stop.png";
     audio.volume = parseInt(document.getElementById("volumeInput").value) / 100;
-    //audio.currentTime = parseInt(document.getElementById("timeInput").value);
     audio.play();
     document.getElementById("playPauseButton").onclick = PauseAudio;
 }
