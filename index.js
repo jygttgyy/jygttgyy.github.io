@@ -1,4 +1,4 @@
-var audio = new Audio("https://jygttgyy.github.io/MadeOfSteel.mp3")
+var audio = new Audio("Musics/Made Of Steel.mp3")
 audio.volume = 0.1;
 audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
