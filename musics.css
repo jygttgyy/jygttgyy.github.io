@@ -8,17 +8,69 @@ span {
     margin: 0.5em;
     margin-right: 0;
 }
+h1 {
+    margin: 0;
+}
+.baseInfos {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputSection {
+    display: flex;
+    align-items: center;
+}
+.inputSection button {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-right: 0.5em;
+    width: 15%;
+    text-align: left;
+}
+.inputSection button img {
+    width: 100%;
+}
+.inputSection span {
+    width: 15%;
+    text-align: right;
+}
+.inputSection input {
+    width: 70%;
+}
+#controls:hover button {
+    opacity: 1;
+}
+#controls:hover #musicImage {
+    opacity: 0.7;
+}
+#controls {
+    display: flex;
+    height: 8cm;
+    width: 8cm;
+}
+#controls button {
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 1;
+}
 #musicName {
-    font-size: 2rem;
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
+    font-size: 2em;
+    /*margin-block-start: 0.5em;
+    margin-block-end: 0.5em;*/
+}
+#musicArtist {
+    font-size: 1.5em;
+    margin-top: 0.5em;
 }
 #musicControlPanel {
     height: max-content;
-    width: min-content;
-    padding-left: 2em;
-    padding-right: 2em;
-    display: flex;
+    width: 8cm;
+    /*padding-left: 2em;
+    padding-right: 2em;*/
+    padding: 1em;
     align-items: center;
     flex-direction: column;
     color: white;
@@ -26,11 +78,8 @@ span {
     background: rgba(60, 60, 60, 0.2);
     border-radius: 4px;
     margin: auto;
-}
-#musicControlPanel div {
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
-    display: flex;
 }
 #controls * {
     padding: 0px;
@@ -44,12 +93,21 @@ span {
     height: 100%;
     width: 100%;
 }
+#musicImage {
+    z-index: 0;
+    opacity: 1;
+    transition: opacity 0.4s;
+    position: fixed;
+    width: inherit;
+    border-radius: 0.1cm;
+}
+/* Dont touch *_*/
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
     cursor: pointer;
-    width: 15rem;
+    width: 100%;
 }
 input[type="range"]:focus {
     outline: none;
