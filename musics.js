@@ -139,7 +139,7 @@ function NextAudio() {
     document.getElementById("musicControlPanel").style.background = "rgba(" + currentAudio.color + ", 0.2)";
     document.getElementById("musicName").innerText = currentAudio.name;
     document.getElementById("musicArtist").innerText = currentAudio.artist;
-    document.getElementById("musicImage").src = currentAudio.picture;
+    document.getElementById("musicImage").src = "Musics/" + currentAudio.picture;
     audio.load()
 }
 NextAudio();
