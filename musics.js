@@ -124,12 +124,14 @@ function OnTimeUpdate() {
 function NextAudio() {
     var currentAudio = audios[audio.current];
     audio.onloadedmetadata = OnMetadataLoad;
-    if (audio.isPlaying) {
-        audio.oncanplay = PlayAudio;
-        document.getElementById("playPauseButton").onclick = PauseAudio;
-    } else {
-        audio.oncanplay = function() {};
-        document.getElementById("playPauseButton").onclick = PlayAudio;
+    audio.onload = function() {
+        if (audio.isPlaying) {
+            audio.oncanplay = PlayAudio;
+            document.getElementById("playPauseButton").onclick = PauseAudio;
+        } else {
+            audio.oncanplay = function() {};
+            document.getElementById("playPauseButton").onclick = PlayAudio;
+        }
     }
     audio.onended = OnEnd;
     audio.ontimeupdate = OnTimeUpdate;
