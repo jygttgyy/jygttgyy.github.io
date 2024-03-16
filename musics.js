@@ -83,6 +83,8 @@ function PlayAudio() {
         audio.volume = parseInt(document.getElementById("volumeInput").value) / 100;
         audio.play();
         document.getElementById("playPauseButton").onclick = PauseAudio;
+    } else {
+        requestAnimationFrame(PlayAudio);
     }
 }
 function OnMetadataLoad() {
