@@ -12,9 +12,11 @@ function DetectActive() {
         window.requestAnimationFrame(DetectActive);
     }
 }
-window.addEventListener("resize", Resize);
+window.onresize = Resize;
+//window.addEventListener("resize", Resize);
 Resize();
-window.addEventListener("load", DetectActive);
+window.onload = DetectActive;
+//window.addEventListener("load", DetectActive);
 
 // Actual Script
 
