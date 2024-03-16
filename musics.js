@@ -86,7 +86,7 @@ function PlayAudio() {
         audio.play();
         document.getElementById("playPauseButton").onclick = PauseAudio;
     } else {
-        requestAnimationFrame(PlayAudio);
+        window.requestAnimationFrame(PlayAudio);
     }
 }
 function OnMetadataLoad() {
