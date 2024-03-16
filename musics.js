@@ -89,59 +89,57 @@ function PlayAudio() {
         window.requestAnimationFrame(PlayAudio);
     }
 }
-function OnMetadataLoad() {
+audio.onload = function() {
+    if (audio.isPlaying) {
+        audio.oncanplay = PlayAudio;
+        //document.getElementById("playPauseButton").onclick = PauseAudio;
+    } else {
+        audio.oncanplay = function() {};
+        //document.getElementById("playPauseButton").onclick = PlayAudio;
+    }
+}
+audio.onloadedmetadata = function() {
     document.getElementById("timeInput").value = 0;
     document.getElementById("timePassed").innerText = "0:00";
     document.getElementById("timeInput").max = audio.duration;
 }
-function OnEnd() {
+audio.onended = function() {
     audio.current += 1;
     if (audio.current >= audios.length) audio.current = 0;
     NextAudio();
 }
-function OnSkip() {
+document.getElementById("forwardsButton").onclick = function() {
     audio.current += 1;
     if (audio.current >= audios.length) audio.current = 0;
     NextAudio();
 }
-function OnBack() {
+document.getElementById("backwardsButton").onclick = function() {
     audio.current -= 1;
     if (audio.current < 0) audio.current = audios.length;
     NextAudio();
 }
-function OnTimeInput() {
+document.getElementById("timeInput").oninput = function() {
     audio.currentTime = document.getElementById("timeInput").value;
     document.getElementById("timePassed").innerText = ParseTime(parseInt(document.getElementById("timeInput").value));
-}
-document.getElementById("timeInput").oninput = OnTimeInput;
-function OnVolumeInput() {
+};
+document.getElementById("volumeInput").oninput = function() {
     let volume = document.getElementById("volumeInput").value;
     audio.volume = volume / 100;
     document.getElementById("volumePercent").innerText = volume + "%";
-}
-document.getElementById("volumeInput").oninput = OnVolumeInput;
-function OnTimeUpdate() {
+};
+audio.ontimeupdate = function() {
     let currentTime = audio.currentTime;
     document.getElementById("timeInput").value = currentTime;
     document.getElementById("timePassed").innerText = ParseTime(currentTime);
 }
 function NextAudio() {
     var currentAudio = audios[audio.current];
-    audio.onloadedmetadata = OnMetadataLoad;
-    audio.onload = function() {
-        if (audio.isPlaying) {
-            audio.oncanplay = PlayAudio;
-            document.getElementById("playPauseButton").onclick = PauseAudio;
-        } else {
-            audio.oncanplay = function() {};
-            document.getElementById("playPauseButton").onclick = PlayAudio;
-        }
-    }
-    audio.onended = OnEnd;
-    audio.ontimeupdate = OnTimeUpdate;
+    //audio.onloadedmetadata = OnMetadataLoad;
+    //audio.onended = OnEnd;
+    //audio.ontimeupdate = OnTimeUpdate;
     audio.src = "Musics/" + currentAudio.name + ".mp3";
-    document.getElementById("backwardsButton").onclick = OnBack;
-    document.getElementById("forwardsButton").onclick = OnSkip;
+    //document.getElementById("backwardsButton").onclick = OnBack;
+    //document.getElementById("forwardsButton").onclick = OnSkip;
     document.getElementById("musicControlPanel").style.background = "rgba(" + currentAudio.color + ", 0.2)";
     document.getElementById("musicName").innerText = currentAudio.name;
     document.getElementById("musicArtist").innerText = currentAudio.artist;
