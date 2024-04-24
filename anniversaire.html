@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Faustina:ital@0;1&family=M+PLUS+1p&display=swap');
+        body * {
+            font-family: "Faustina";
+            font-style: bold;
+        }
+        .or {
+            background: -webkit-linear-gradient(rgb(255, 100, 0), rgb(255, 200, 0));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ye {
+            background: -webkit-linear-gradient(rgb(255, 160, 0), rgb(255, 255, 0));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <body style="background-color: black;">
+        <p style="font-size: 150px; text-align: center;">
+            Joyeux Anniversaire
+            <br>
+            <span style="font-size: 200px;">Mme. DENIS</span>
+        </p>
+    </body>
+    <script>
+        const ps = document.querySelector("p");
+        const e = async () => {
+            ps.className = "or";
+            await new Promise((resolve) => setTimeout(resolve, 600));
+            ps.className = "ye";
+            setTimeout(e, 600);
+        }
+        e();
+    </script>
+</html>
