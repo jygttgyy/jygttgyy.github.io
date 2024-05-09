@@ -1,8 +1,13 @@
+document.body.style.height = window.innerHeight + "px";
+document.body.style.width = window.innerWidth + "px";
 var audio = new Audio("Musics/Made Of Steel.mp3")
 audio.volume = 0.1;
 audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
+const WindowHandler = () => {
+    
+}
 function imageRefresh(img, timeout) {
     setTimeout(function() {
         img.src = img.src + "";
@@ -38,4 +43,4 @@ function DetectActive() {
     }
 }
 window.addEventListener("resize", Resize);
-window.addEventListener("load", function() {Resize(); DetectActive()});
+window.addEventListener("load", DetectActive);

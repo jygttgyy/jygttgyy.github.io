@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>jygttgyy's Music Player</title>
-        <link rel="stylesheet" href="musics.css">
-        <link rel="icon" type="image/x-icon" href="icon.ico">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="../icon.ico">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://jygttgyy.github.io/radio">
         <meta property="og:title" content="jygttgyy's Radio">
@@ -14,30 +14,30 @@
         <div id="shadow"></div>
         <div id="musicControlPanel">
             <div id="controls">
-                <img id="musicImage" src="Musics/Made Of Steel.jpg">
-                <button id="backwardsButton"><img style="rotate: 180deg; z-index: 0;" src="ButtonImages/FastForward.png"></button>
-                <button id="playPauseButton"><img src="ButtonImages/Play.png"></button>
-                <button id="forwardsButton"><img src="ButtonImages/FastForward.png"></button>
+                <img id="musicImage" src="../Musics/Made Of Steel.jpg">
+                <button id="backwardsButton"><img style="rotate: 180deg; z-index: 0;" src="../ButtonImages/FastForward.png"></button>
+                <button id="playPauseButton"><img src="../ButtonImages/Play.png"></button>
+                <button id="forwardsButton"><img src="../ButtonImages/FastForward.png"></button>
             </div>
             <div>
-                <button id="shuffleButton" style="display: none;"><img src="ButtonImages/ShuffleOff.png"></button>
+                <button id="shuffleButton" style="display: none;"><img src="../ButtonImages/ShuffleOff.png"></button>
                 <div class="baseInfos">
                     <h1 id="musicName">Music Player</h1>
                     <h1 id="musicArtist">jygttgyy</h1>
                 </div>
-                <button id="loopButton" style="display: none;"><img src="ButtonImages/LoopOff.png"></button>
+                <button id="loopButton" style="display: none;"><img src="../ButtonImages/LoopOff.png"></button>
             </div>
             <div class="inputSection">
-                <button><img src="ButtonImages/HighVolume.png"></button>
+                <button><img src="../ButtonImages/HighVolume.png"></button>
                 <input id="volumeInput" type="range" min="0" max="100" value="30">
                 <span id="volumePercent">30%</span>
             </div>
             <div class="inputSection">
-                <button><img src="ButtonImages/HighVolume.png"></button>
+                <button><img src="../ButtonImages/HighVolume.png"></button>
                 <input id="timeInput" type="range" min="0" max="69" value="0">
                 <span id="timePassed">0:00</span>
             </div>
         </div>
     </body>
-    <script src="musics.js"></script>
+    <script src="script.js"></script>
 </html>
