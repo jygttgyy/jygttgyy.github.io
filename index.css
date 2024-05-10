@@ -35,3 +35,18 @@ a:hover {
 #shadow.welcome {
     animation-name: d;
 }
+div[type="window"] {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(50, 50, 50, 0.5);
+    width: 410px;
+    height: 210px;
+    left: 0px;
+    top: 0px;
+}
+div[type="bar"] {
+    background: rgba(255, 120, 0, 0.5);
+    height: 20px;
+    width: 100%;
+}
