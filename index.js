@@ -15,7 +15,6 @@ const WindowHandler = () => {
             bar.parentElement.style.top = y + (event.y - base_my) + "px";
         }
         const Cancel = (event) => {
-            MouseAction(event);
             bar.onmousemove = null;
         }
         bar.onmousedown = (event) => {
