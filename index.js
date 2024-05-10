@@ -5,7 +5,6 @@ audio.volume = 0.1;
 audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
-document.getElementById("e").onmousedown
 const WindowHandler = () => {
     document.querySelectorAll('div[type=window"]').forEach(element => {
         let bar = element.querySelector('div[type="bar"]');
