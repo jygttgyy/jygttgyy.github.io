@@ -14,10 +14,14 @@ const WindowHandler = () => {
             bar.parentElement.style.left = x + (event.x - base_mx) + "px";
             bar.parentElement.style.top = y + (event.y - base_my) + "px";
         }
+        const Cancel = (event) => {
+            MouseAction(event);
+            bar.onmousemove = null;
+        }
         bar.onmousedown = (event) => {
             base_mx = event.x, base_my = event.y;
             bar.onmousemove = MouseAction;
-            bar.onmouseup = MouseAction;
+            bar.onmouseup = Cancel;
         }
     });
 }
