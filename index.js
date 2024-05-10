@@ -6,7 +6,7 @@ audio.loop = true;
 var text = "jygttgyy's Official Webpage ";
 var last = 0;
 const WindowHandler = () => {
-    document.querySelectorAll('div[type=window"]').forEach(element => {
+    document.querySelectorAll('div[type="window"]').forEach(element => {
         let bar = element.querySelector('div[type="bar"]');
         let x = parseInt(bar.parentElement.style.left.slice(0, -2)), y = parseInt(bar.style.top.slice(0, -2));
         var base_mx, base_my;
