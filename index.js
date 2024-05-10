@@ -7,8 +7,8 @@ var text = "jygttgyy's Official Webpage ";
 var last = 0;
 const WindowHandler = () => {
     document.querySelectorAll('div[type="window"]').forEach(element => {
-        let bar = element.querySelector('div[type="bar"]');
-        let x = parseInt(bar.parentElement.style.left.slice(0, -2)), y = parseInt(bar.parentElement.style.top.slice(0, -2));
+        const bar = element.querySelector('div[type="bar"]');
+        var x = 0, y = 0;
         var base_mx, base_my;
         const MouseAction = (event) => {
             bar.parentElement.style.left = x + (event.x - base_mx) + "px";
@@ -16,8 +16,11 @@ const WindowHandler = () => {
         }
         const Cancel = (event) => {
             bar.onmousemove = null;
+            x = parseInt(bar.parentElement.style.left.slice(0, -2));
+            y = parseInt(bar.parentElement.style.top.slice(0, -2));
         }
         bar.onmousedown = (event) => {
+            Cancel();
             base_mx = event.x, base_my = event.y;
             bar.onmousemove = MouseAction;
             bar.onmouseup = Cancel;
