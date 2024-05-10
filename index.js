@@ -11,8 +11,8 @@ const WindowHandler = () => {
         let x = parseInt(bar.parentElement.style.left.slice(0, -2)), y = parseInt(bar.style.top.slice(0, -2));
         var base_mx, base_my;
         const MouseAction = (event) => {
-            bar.parentElement.style.left = x + (event.x - base_mx);
-            bar.parentElement.style.top = y + (event.y - base_my);
+            bar.parentElement.style.left = x + (event.x - base_mx) + "px";
+            bar.parentElement.style.top = y + (event.y - base_my) + "px";
         }
         bar.onmousedown = (event) => {
             base_mx = event.x, base_my = event.y;
