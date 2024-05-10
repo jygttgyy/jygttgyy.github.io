@@ -9,14 +9,16 @@ document.getElementById("e").onmousedown
 const WindowHandler = () => {
     document.querySelectorAll('div[type=window"]').forEach(element => {
         let bar = element.querySelector('div[type="bar"]');
+        let x = parseInt(bar.parentElement.style.left.slice(0, -2)), y = parseInt(bar.style.top.slice(0, -2));
+        var base_mx, base_my;
+        const MouseAction = (event) => {
+            bar.parentElement.style.left = x + (event.x - base_mx);
+            bar.parentElement.style.top = y + (event.y - base_my);
+        }
         bar.onmousedown = (event) => {
-            let originalPos = [event.x, event.y];
-            bar.onmousemove = () => {
-                bar.style.top = 
-            }
-            bar.onmouseup = () => {
-
-            }
+            base_mx = event.x, base_my = event.y;
+            bar.onmousemove = MouseAction;
+            bar.onmouseup = MouseAction;
         }
     });
 }
