@@ -21,14 +21,15 @@
                 const PROFILE = document.getElementById("profile");
                 const USERNAME = document.getElementById("username");
                 const ACTIVITY = document.getElementById("activity");
-                while (true) {
-                    await fetch("http://us.pylex.me:8667/api?userid=701017644010176515&guildid=998234194494894100")
-                    .then(res => res.json())
-                    .then(out => {
-                        PROFILE.src = out.displayAvatarURL;
-                        USERNAME.innerText = out.displayName;
-                    })
+                const loop = async (site) => {
+                    while (true) {
+                        let response = await fetch(site)
+                        let jsonData = await response.json();
+                        PROFILE.src = jsonData.displayAvatarURL;
+                        USERNAME.innerText = jsonData.displayName;
+                    }
                 }
+                loop("http://us.pylex.me:8667/api?userid=701017644010176515&guildid=998234194494894100");
             </script>
         </div>
         <img src="https://lanyard.cnrad.dev/api/701017644010176515" onload='imageRefresh(this, 1000)'>
