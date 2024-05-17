@@ -13,6 +13,23 @@
     <body>
         <div type="window" style="width: 410px; height: 210px; left: 0px; top: 0px;">
             <div type="bar"></div>
+            <h1>Discord</h1>
+            <img id="profile" src="">
+            <p id="username">jygttgyy</p>
+            <p id="activity">None?</p>
+            <script>
+                const PROFILE = document.getElementById("profile");
+                const USERNAME = document.getElementById("username");
+                const ACTIVITY = document.getElementById("activity");
+                while (true) {
+                    await fetch("http://us.pylex.me:8667/api?userid=701017644010176515&guildid=998234194494894100")
+                    .then(res => res.json())
+                    .then(out => {
+                        PROFILE.src = out.displayAvatarURL;
+                        USERNAME.innerText = out.displayName;
+                    })
+                }
+            </script>
         </div>
         <img src="https://lanyard.cnrad.dev/api/701017644010176515" onload='imageRefresh(this, 1000)'>
         <a href="https://jygttgyy.github.io/musics">Music Player</a>
