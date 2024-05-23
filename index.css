@@ -46,3 +46,8 @@ div[type="bar"] {
     height: 20px;
     width: 100%;
 }
+div[type="bar"] > p {
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 0 0px black;
+}

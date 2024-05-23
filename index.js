@@ -63,4 +63,7 @@ function DetectActive() {
     }
 }
 window.addEventListener("resize", Resize);
-window.addEventListener("load", DetectActive);
+window.addEventListener("load", () => {
+    DetectActive();
+    Resize();
+});
