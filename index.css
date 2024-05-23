@@ -43,6 +43,7 @@ div[type="window"] {
     background: rgba(50, 50, 50, 0.5);
 }
 div[type="bar"] {
+    user-select: none;
     background: rgba(255, 120, 0, 0.5);
     height: 20px;
     width: 100%;
