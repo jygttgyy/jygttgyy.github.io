@@ -1,4 +1,5 @@
 body {
+    color: rgb(255, 200, 150);
     margin: 0px;
     display: flex;
     overflow: hidden;
