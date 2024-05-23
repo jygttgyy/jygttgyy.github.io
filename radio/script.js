@@ -60,7 +60,7 @@ const audios = [
         "name": "Seduction",
         "artist": "Eminem",
         "picture": "Recovery.jpg",
-        "color": "rgb(137, 144, 153)"
+        "color": "137, 144, 153"
     },
     {
         "name": "So Bad",
@@ -137,13 +137,13 @@ function NextAudio() {
     //audio.onloadedmetadata = OnMetadataLoad;
     //audio.onended = OnEnd;
     //audio.ontimeupdate = OnTimeUpdate;
-    audio.src = "Musics/" + currentAudio.name + ".mp3";
+    audio.src = "../Musics/" + currentAudio.name + ".mp3";
     //document.getElementById("backwardsButton").onclick = OnBack;
     //document.getElementById("forwardsButton").onclick = OnSkip;
     document.getElementById("musicControlPanel").style.background = "rgba(" + currentAudio.color + ", 0.2)";
     document.getElementById("musicName").innerText = currentAudio.name;
     document.getElementById("musicArtist").innerText = currentAudio.artist;
-    document.getElementById("musicImage").src = "Musics/" + currentAudio.picture;
+    document.getElementById("musicImage").src = "../Musics/" + currentAudio.picture;
     audio.load()
 }
 NextAudio();
