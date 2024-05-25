@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>jygttgyy's Official Webpage</title>
-        <link rel="stylesheet" href="index.css">
-        <link rel="icon" type="image/x-icon" href="icon.ico">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://jygttgyy.github.io">
-        <meta property="og:title" content="jygttgyy's Official Webpage">
-        <meta property="og:description" content="This is where I'll display my profile in a prettier way.">
-        <meta property="og:image" content="https://jygttgyy.github.io/icon.png">
-    </head>
-    <body>
-        <div type="window" style="width: 410px; height: 210px; left: 0px; top: 0px; text-align: center;">
-            <div type="bar">
-                <p>Discord</p>
+	<head>
+		<title>jygttgyy's Official Webpage</title>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="icon" type="image/x-icon" href="icon.ico" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://jygttgyy.github.io" />
+		<meta property="og:title" content="jygttgyy's Official Webpage" />
+		<meta
+			property="og:description"
+			content="This is where I'll display my profile in a prettier way."
+		/>
+		<meta
+			property="og:image"
+			content="https://jygttgyy.github.io/icon.png"
+		/>
+	</head>
+	<body>
+		<div
+			type="window"
+			style="width: 410px; height: 210px; left: 10px; top: 10px; text-align: center;"
+		>
+			<div type="bar" style="height: 20px; top: 0px;">
+				<p>Discord</p>
+			</div>
+			<!--img id="profile" src=""-->
+			<h1 id="username">jygttgyy</h1>
+			<h1 id="activity">None?</h1>
+			<script>
+				const PROFILE = document.getElementById("profile");
+				const USERNAME = document.getElementById("username");
+				const ACTIVITY = document.getElementById("activity");
+				const loop = async (site) => {
+					while (true) {
+						let response = await fetch(site);
+						let jsonData = await response.json();
+						PROFILE.src = jsonData.displayAvatarURL;
+						USERNAME.innerText = jsonData.displayName;
+					}
+				};
+				// Disabled 'cause of some stupid "http" cross origin bullshit~
+				// loop("http://us.pylex.me:8667/api?userid=701017644010176515&guildid=998234194494894100");
+			</script>
+		</div>
+		<div
+			type="window"
+			style="width: 410px; height: 210px; left: 10px; top: 250px;"
+            id="musicPlayer"
+		>
+			<div type="bar" style="position: absolute; height: 20px; top: 0px;">
+				<p>Music Player</p>
+			</div>
+			<img
+				src="../Musics/Made Of Steel.jpg"
+				style="position: relative; border-radius: 5px; height: 200px; width: 200px;"
+			/>
+            <div style="width: 190px;">
+                <h2 style="text-align: center;">Made Of Steel</h2>
+                <h3 style="text-align: center;">Battlejuice X LeBrock</h3>
             </div>
-            <!--img id="profile" src=""-->
-            <h1 id="username">jygttgyy</h1>
-            <h1 id="activity">None?</h1>
-            <script>
-                const PROFILE = document.getElementById("profile");
-                const USERNAME = document.getElementById("username");
-                const ACTIVITY = document.getElementById("activity");
-                const loop = async (site) => {
-                    while (true) {
-                        let response = await fetch(site)
-                        let jsonData = await response.json();
-                        PROFILE.src = jsonData.displayAvatarURL;
-                        USERNAME.innerText = jsonData.displayName;
-                    }
-                }
-                // Disabled 'cause of some stupid "http" cross origin bullshit~
-                // loop("http://us.pylex.me:8667/api?userid=701017644010176515&guildid=998234194494894100");
-            </script>
-        </div>
-        <div type="window" style="width: 410px; height: 210px; left: 0px; top: 0px;">
-            <div type="bar">
-                <p>Music Player</p>
-            </div>
-            <div>
-                <!--script src="radio/script.js"></script-->
-            </div>
-        </div>
-        <!--img src="https://lanyard.cnrad.dev/api/701017644010176515" onload='imageRefresh(this, 1000)'-->
-        <a href="https://jygttgyy.github.io/radio">Music Player</a>
-        <div id="shadow"></div>
-    </body>
-    <script src="index.js"></script>
+		</div>
+		<!--img src="https://lanyard.cnrad.dev/api/701017644010176515" onload='imageRefresh(this, 1000)'-->
+		<!--a href="https://jygttgyy.github.io/radio">Music Player</a-->
+		<!--div id="shadow"></div-->
+	</body>
+	<script src="index.js"></script>
 </html>

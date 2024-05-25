@@ -39,17 +39,39 @@ a:hover {
 div[type="window"] {
     position: absolute;
     overflow: hidden;
+    padding-top: 20px;
     border-radius: 10px;
     background: rgba(50, 50, 50, 0.5);
+    box-shadow: 0 0 2px rgb(20, 20, 20);
+}
+div[type="window"] > img {
+    box-shadow: 0 0 2px rgb(20, 20, 20);
+    margin: 0px;
 }
 div[type="bar"] {
+    position: absolute;
+    z-index: 2;
     user-select: none;
     background: rgba(255, 120, 0, 0.5);
-    height: 20px;
     width: 100%;
+    box-shadow: 0 1px 2px rgb(120, 60, 0);
+}
+div[type="bar"]:hover {
+    cursor: grab;
+}
+div[type="bar"]:active {
+    cursor: grabbing;
 }
 div[type="bar"] > p {
     margin: 0;
     text-align: center;
     text-shadow: 0 0 0px black;
+}
+#musicPlayer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#musicPlayer > *:not(div[type="bar"]) {
+    margin: 5px;
 }
