@@ -1,0 +1,37 @@
+html {
+	height: 100%;
+	width: 100%;
+}
+body {
+	color: rgb(200, 200, 200);
+	text-shadow: 0 0 2px black;
+	background: linear-gradient(rgb(140, 200, 255), rgb(200, 255, 255));
+	margin: 0px;
+}
+div {
+	position: absolute;
+}
+#loading, #clickDiv {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	background-color: rgb(0, 0, 0);
+}
+#click {
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+	color: rgb(200, 200, 200);
+	font-size: 50px;
+}
+#save {
+	background: none;
+	border: none;
+	font-size: 50px;
+	color: rgb(200, 200, 200);
+	text-shadow: 0 0 2px black;
+}
+h3 {
+	text-align: center;
+}
