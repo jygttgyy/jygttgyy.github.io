@@ -2,6 +2,7 @@
     --primary: rgb(69, 69, 69);
     --secondary: rgb(255, 96, 0);
     --tertiary: rgb(255, 140, 0);
+    --quaternary: rgb(255, 180, 0);
     --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     --text: rgb(255, 230, 199);
     --textAlt: rgb(255, 165, 89);
@@ -16,6 +17,13 @@ body {
     box-shadow: var(--shadow);
     background-color: var(--primary);
 }
-#main > nav {
+#main > nav, #main > footer {
     background-color: var(--tertiary);
+}
+#main > header {
+    background-color: var(--quaternary);
+}
+a {
+    color: var(--text);
+    text-decoration: underline;
 }
