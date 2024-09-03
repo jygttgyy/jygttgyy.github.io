@@ -1,77 +1,21 @@
+:root {
+    --primary: rgb(69, 69, 69);
+    --secondary: rgb(255, 96, 0);
+    --tertiary: rgb(255, 140, 0);
+    --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --text: rgb(255, 230, 199);
+    --textAlt: rgb(255, 165, 89);
+}
 body {
-    color: rgb(255, 200, 150);
-    margin: 0px;
-    display: flex;
-    overflow: hidden;
-    background-color: black;
-    background: linear-gradient(0deg, black 0%, rgb(50, 50, 50) 100%);
+    color: var(--text);
+    background-color: var(--secondary);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
-img {
-    margin: auto;
+#main {
+    box-shadow: var(--shadow);
+    background-color: var(--primary);
 }
-a {
-    text-decoration: none;
-    position: absolute;
-    margin: 1em;
-    color: white;
-    right: 0px;
-    bottom: 0px;
-}
-a:hover {
-    color: gold;
-}
-#shadow {
-    position: absolute;
-    opacity: 1;
-    width: inherit;
-    height: inherit;
-    background-color: black;
-    animation-fill-mode: forwards;
-    animation-duration: 2s;
-}
-@keyframes d {
-    from {opacity: 1;}
-    to {opacity: 0;}
-}
-#shadow.welcome {
-    animation-name: d;
-}
-div[type="window"] {
-    position: absolute;
-    overflow: hidden;
-    padding-top: 20px;
-    border-radius: 10px;
-    background: rgba(50, 50, 50, 0.5);
-    box-shadow: 0 0 2px rgb(20, 20, 20);
-}
-div[type="window"] > img {
-    box-shadow: 0 0 2px rgb(20, 20, 20);
-    margin: 0px;
-}
-div[type="bar"] {
-    position: absolute;
-    z-index: 2;
-    user-select: none;
-    background: rgba(255, 120, 0, 0.5);
-    width: 100%;
-    box-shadow: 0 1px 2px rgb(120, 60, 0);
-}
-div[type="bar"]:hover {
-    cursor: grab;
-}
-div[type="bar"]:active {
-    cursor: grabbing;
-}
-div[type="bar"] > p {
-    margin: 0;
-    text-align: center;
-    text-shadow: 0 0 0px black;
-}
-#musicPlayer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-#musicPlayer > *:not(div[type="bar"]) {
-    margin: 5px;
+#main > nav {
+    background-color: var(--tertiary);
 }
