@@ -18,7 +18,7 @@ const renderer = new THREE.WebGLRenderer({
 	antialias: true,
 	powerPreference: "high-performance",
 });
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = false;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -89,14 +89,14 @@ const Create = async (mapParams = {size: 20}) => {
 					block.name = "bedrock";
 				}
 				created += 1;
-				if (created % Math.pow(mapParams.size, 2) * 256 === 0) {
+				if (created % Math.pow(mapParams.size, 2) * 4096 === 0) {
 					load.innerText = `Loading: ${created}/` + mapParams.size * 256 * mapParams.size;
 					await new Promise(resolve => setTimeout(resolve, 0))
 				}
 				/*let wire = blockOutlines.clone();
 				wire.position.set(x, y, z);
 				scene.add(wire);*/
-				if (!block) { continue }
+				if (!block) continue
 				block.castShadow = true;
 				block.receiveShadow = true;
 				block.position.set(x, y, z);
@@ -106,14 +106,14 @@ const Create = async (mapParams = {size: 20}) => {
 	}
 	return map;
 }
-const map = await Create({ size: 50 });
+const map = await Create({ size: 20 });
 const Hlight = new THREE.AmbientLight("rgb(255, 255, 255)", 0.1);
 const light = new THREE.DirectionalLight("rgb(255, 255, 255)", 3);
-light.castShadow = true;
-light.position.set(50, 100, 50);
+light.castShadow = false
+light.position.set(50, 100, 50)
 light.rotateX(Math.PI / 4)
 scene.add(Hlight);
-scene.add( light );
+scene.add(light);
 blockOutlines.name = undefined
 scene.add(blockOutlines);
 //scene.background = null; //new THREE.Color(100, 100, 200);
@@ -138,9 +138,7 @@ const CheckPlayerFalling = (playerCoords) => {
 	playerCoords.y -= 1;
 }
 var inTheAir = false;
-controls.lock();
 function KeyHandle(dif) {
-	controls.lock();
 	dif *= 1/60;
 	keyDowned.forEach((_, key) => {
 		let fakeCam = camera.clone(), coords;
@@ -215,9 +213,9 @@ function PlaceBlock() {
 }
 function Raycast() {
 	raycaster.setFromCamera(pointer, camera);
-	let sceneObjects = scene.children.filter((_) => _.name !== undefined);
-	const intersects = raycaster.intersectObjects(sceneObjects);
-	if (intersects.length === 0) { return }
+	let sceneObjects = scene.children.filter(_ => _.name !== undefined);
+	let intersects = raycaster.intersectObjects(sceneObjects);
+	if (intersects.length === 0) return
 	selectedBlock = intersects[0].object;
 	blockPlacementPosition = selectedBlock.position.clone().add(intersects[0].face.normal);
 	blockOutlines.position.set(selectedBlock.position.x, selectedBlock.position.y, selectedBlock.position.z)
@@ -235,9 +233,10 @@ scene.onBeforeRender = () => //camera.position.y = 66;
 document.onkeydown = event => keyDowned.set(event.code, true);
 document.onkeyup = event => keyDowned.delete(event.code);
 document.onmousedown = (event) => {
+	controls.lock();
 	switch (event.button) {
 		case 0:
-			if (!selectedBlock) { return }
+			if (!selectedBlock) return
 			let sbPos = selectedBlock.position;
 			if (map.get(`${sbPos.x + 1};${sbPos.y};${sbPos.z}`)) scene.add(map.get(`${sbPos.x + 1};${sbPos.y};${sbPos.z}`));
 			if (map.get(`${sbPos.x - 1};${sbPos.y};${sbPos.z}`)) scene.add(map.get(`${sbPos.x - 1};${sbPos.y};${sbPos.z}`));
@@ -258,4 +257,4 @@ document.onresize = () => {
 	camera.updateProjectionMatrix();
 }
 renderer.setAnimationLoop(animate);
-document.getElementById("save").onclick = Save;
+//document.getElementById("save").onclick = Save;
