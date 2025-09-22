@@ -13,12 +13,13 @@
 					<p id="content">Message</p>
 				</div>
 			</div>
-			<div id="message_box">
-				<input id="username_input" value="Username">
-				<input id="input" value="Enter your message here!">
-				<button id="send">Send</button>
-			</div>
+			<form id="message_box" action="/send-message" method="post">
+				<input id="username_input" placeholder="Username" required minlength="4">
+				<input id="input" placeholder="Enter your message here!" required minlength="1">
+				<button type="submit" id="send">Send</button>
+			</form>
 		</div>
 	</body>
-	<script src="script.js"></script>
+	<script src="new.js"></script>
+	<!--script src="script.js"></script-->
 </html>
